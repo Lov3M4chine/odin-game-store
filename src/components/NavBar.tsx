@@ -7,13 +7,19 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import Badge from '@mui/material/Badge'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import MoreIcon from '@mui/icons-material/MoreVert'
 import Logo from './Logo'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import DeleteIcon from '@mui/icons-material/Delete'
+import {
+  Button,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText
+} from '@mui/material'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,74 +62,63 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 export default function NavBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null)
+  const [cartDrawerOpen, setCartDrawerOpen] = React.useState(false)
 
-  const isMenuOpen = Boolean(anchorEl)
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const toggleCartDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return
+      }
+      setCartDrawerOpen(open)
+    }
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null)
-  }
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-    handleMobileMenuClose()
-  }
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget)
-  }
-
-  const menuId = 'primary-search-account-menu'
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  )
-
-  const mobileMenuId = 'primary-search-account-menu-mobile'
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-    </Menu>
+  const list = () => (
+    <Box role="presentation">
+      <List sx={{ mt: 8 }}>
+        <Divider component="div" role="presentation">
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ mt: 2 }}
+            gap={3}
+          >
+            <Typography variant="h5" color="primary">
+              0 Games
+            </Typography>
+            <Button
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              color="secondary"
+              size="small"
+            >
+              Clear
+            </Button>
+          </Box>
+        </Divider>
+        {/* Replace with map over cart items */}
+        <ListItem>
+          <ListItemText primary={'Item 1'} />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary={'Item 2'} />
+        </ListItem>
+        {/* ... */}
+        <Divider sx={{ position: 'fixed', bottom: 0, margin: 2 }}>
+          <Typography variant="h5" color="primary" display="inline">
+            Total:
+          </Typography>
+          <Typography variant="h5" display="inline">
+            {' '}
+            $50
+          </Typography>
+        </Divider>
+      </List>
+    </Box>
   )
 
   return (
@@ -164,8 +159,9 @@ export default function NavBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
-              aria-label="show 4 cart items"
+              aria-label="show cart items"
               color="inherit"
+              onClick={() => setCartDrawerOpen((prev) => !prev)}
             >
               <Badge badgeContent={4} color="error">
                 <ShoppingCartIcon />
@@ -176,18 +172,20 @@ export default function NavBar() {
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
               color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+            ></IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      <Drawer
+        anchor="right"
+        open={cartDrawerOpen}
+        onClose={toggleCartDrawer(false)}
+        sx={{ width: 240, '& .MuiDrawer-paper': { width: 240 } }}
+      >
+        {list()}
+      </Drawer>
     </Box>
   )
 }
