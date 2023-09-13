@@ -1,8 +1,9 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import {
   DrawerContextType,
+  DrawerProviderProps,
   DrawerStates,
-  ToggleDrawerFunction
+  DrawerToggleCallback
 } from 'types/types'
 
 const DrawerContext = createContext<DrawerContextType | undefined>(undefined)
@@ -15,17 +16,13 @@ export const useDrawer = () => {
   return context
 }
 
-type DrawerProviderProps = {
-  children: ReactNode
-}
-
 export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
   const [drawerStates, setDrawerStates] = useState<DrawerStates>({
     navDrawerOpen: true,
     cartDrawerOpen: false
   })
 
-  const toggleDrawer: ToggleDrawerFunction = (drawer) => {
+  const toggleDrawer: DrawerToggleCallback = (drawer) => {
     setDrawerStates((prev) => ({ ...prev, [drawer]: !prev[drawer] }))
   }
 

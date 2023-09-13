@@ -1,9 +1,9 @@
 import { getEnvVariable } from 'utils/envUtils'
+const TWITCH_TOKEN_ENDPOINT = 'https://id.twitch.tv/oauth2/token'
+const CLIENT_ID = getEnvVariable('REACT_APP_CLIENT_ID')
 
 // Fetches the access token from Twitch endpoint.
-export const getAccessToken = async (): Promise<string> => {
-  const TWITCH_TOKEN_ENDPOINT = 'https://id.twitch.tv/oauth2/token'
-  const CLIENT_ID = getEnvVariable('REACT_APP_CLIENT_ID')
+export const getIGDBAccessToken = async (): Promise<string> => {
   const url = `${TWITCH_TOKEN_ENDPOINT}?client_id=${CLIENT_ID}&client_secret=${getEnvVariable(
     'REACT_APP_CLIENT_SECRET'
   )}&grant_type=client_credentials`

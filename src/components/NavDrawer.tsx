@@ -23,6 +23,7 @@ import SwitchIcon from './Icons/SwitchIcon'
 import RPGIcon from './Icons/RPGIcon'
 import StrategyIcon from './Icons/StrategyIcon'
 import ShooterIcon from './Icons/ShooterIcon'
+import { NavDrawerListItemProps, NavDrawerToggleProps } from 'types/types'
 
 const drawerWidth = 240
 
@@ -48,12 +49,7 @@ export const genreMenuItems = [
   { icon: <ShooterIcon />, text: 'Shooter' }
 ]
 
-type CustomListItemProps = {
-  icon: React.ReactNode
-  text: string
-}
-
-function CustomListItem({ icon, text }: CustomListItemProps) {
+function CustomListItem({ icon, text }: NavDrawerListItemProps) {
   return (
     <ListItem disablePadding>
       <ListItemButton>
@@ -64,12 +60,10 @@ function CustomListItem({ icon, text }: CustomListItemProps) {
   )
 }
 
-interface NavDrawerProps {
-  open: boolean
-  onClose: () => void
-}
-
-export const NavDrawer: React.FC<NavDrawerProps> = ({ open, onClose }) => {
+export const NavDrawer: React.FC<NavDrawerToggleProps> = ({
+  open,
+  onClose
+}) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />

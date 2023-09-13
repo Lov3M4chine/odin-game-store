@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type Game = {
   cover: number
   genre: number[]
@@ -11,9 +13,28 @@ export type DrawerStates = {
   cartDrawerOpen: boolean
 }
 
-export type ToggleDrawerFunction = (drawer: keyof DrawerStates) => void
+export type DrawerToggleCallback = (drawer: keyof DrawerStates) => void
 
-export type DrawerContextType = {
+export interface DrawerContextType {
   drawerStates: DrawerStates
-  toggleDrawer: ToggleDrawerFunction
+  toggleDrawer: DrawerToggleCallback
+}
+
+export interface DrawerProviderProps {
+  children: ReactNode
+}
+
+export interface ToggleableComponentProps {
+  open: boolean
+  onClose: (event: React.KeyboardEvent | React.MouseEvent) => void
+}
+
+export type NavDrawerListItemProps = {
+  icon: React.ReactNode
+  text: string
+}
+
+export interface NavDrawerToggleProps {
+  open: boolean
+  onClose: () => void
 }

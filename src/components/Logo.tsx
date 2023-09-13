@@ -1,4 +1,4 @@
-function Logo() {
+export default function Logo() {
   return (
     <>
       <svg
@@ -32,5 +32,3 @@ function Logo() {
     </>
   )
 }
-
-export default Logo

@@ -10,13 +10,12 @@ import {
   Drawer
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { ToggleableComponentProps } from 'types/types'
 
-interface Props {
-  open: boolean
-  onClose: (event: React.KeyboardEvent | React.MouseEvent) => void
-}
-
-const ShoppingCartDrawer: React.FC<Props> = ({ open, onClose }) => {
+const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
+  open,
+  onClose
+}) => {
   const list = () => (
     <Box role="presentation">
       <List sx={{ mt: 8 }}>
