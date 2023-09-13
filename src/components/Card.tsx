@@ -43,7 +43,7 @@ export default function GameCard() {
         <Button size="small" color="primary">
           Details
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="secondary">
           Add to Cart
         </Button>
       </CardActions>
