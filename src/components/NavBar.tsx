@@ -18,7 +18,7 @@ import ShoppingCartDrawer from './ShoppingCartDrawer'
 import { useDrawer } from 'contexts/DrawerContext'
 import { NavDrawer } from './NavDrawer'
 
-export default function NavBar() {
+export default function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
 
   return (

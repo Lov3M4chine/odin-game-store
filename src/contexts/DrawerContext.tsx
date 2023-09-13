@@ -1,16 +1,9 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react'
-
-type DrawerStates = {
-  navDrawerOpen: boolean
-  cartDrawerOpen: boolean
-}
-
-type ToggleDrawerFunction = (drawer: keyof DrawerStates) => void
-
-type DrawerContextType = {
-  drawerStates: DrawerStates
-  toggleDrawer: ToggleDrawerFunction
-}
+import {
+  DrawerContextType,
+  DrawerStates,
+  ToggleDrawerFunction
+} from 'types/types'
 
 const DrawerContext = createContext<DrawerContextType | undefined>(undefined)
 

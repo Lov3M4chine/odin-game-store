@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@mui/material/styles'
 import theme from 'styling/theme'
-import NavOverlay from './NavOverlay'
 import { DrawerProvider } from 'contexts/DrawerContext'
 import GameCardContainer from './GameCardContainer'
+import NavOverlay from './NavBar'
 
 function App() {
   return (
