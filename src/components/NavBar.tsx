@@ -32,7 +32,7 @@ export default function NavBar() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+            aria-label="toggle drawer"
             sx={{ mr: 24 }}
             onClick={() => toggleDrawer('navDrawerOpen')}
           >

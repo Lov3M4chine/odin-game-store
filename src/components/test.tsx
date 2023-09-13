@@ -1,18 +1,49 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import { NavDrawer } from './NavDrawer'
+import IconButton from '@mui/material/IconButton'
 import { topMenuItems, platformMenuItems, genreMenuItems } from './NavDrawer'
 import '@testing-library/jest-dom/extend-expect'
 
+type MockFn = {
+  (): void
+  called: boolean
+}
+
+function createMockFn(): MockFn {
+  const fn = function () {
+    fn.called = true
+  }
+  fn.called = false
+  return fn as MockFn
+}
+
 describe('NavDrawer Component', () => {
+  let onCloseMock: MockFn
+
   beforeEach(() => {
-    render(<NavDrawer open={true} onClose={() => {}} />)
+    onCloseMock = createMockFn()
+    render(
+      <>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="toggle drawer"
+          sx={{ mr: 24 }}
+          onClick={onCloseMock} // Mocked toggle function
+        >
+          {/* Add your icon component here if it's not automatically rendered */}
+        </IconButton>
+        <NavDrawer open={true} onClose={onCloseMock} />
+      </>
+    )
   })
 
-  // Test to check if the Drawer component is rendered
-  test('renders Drawer component', () => {
-    const drawerElements = screen.getAllByRole('presentation')
-    expect(drawerElements.length).toBeGreaterThan(0)
+  test('calls onClose when the button is clicked', () => {
+    const toggleButton = screen.getByLabelText('toggle drawer')
+    fireEvent.click(toggleButton)
+    expect(onCloseMock.called).toBe(true)
   })
 
   // Tests to check if the "Top", "Platform", and "Genre" headings are rendered
@@ -45,5 +76,14 @@ describe('NavDrawer Component', () => {
       const menuItem = screen.getByText(item.text)
       expect(menuItem).toBeInTheDocument()
     })
+  })
+
+  test('NavDrawer starts open', () => {
+    const allTopElements = screen.getAllByText('Top')
+    expect(allTopElements.length).toBeGreaterThan(0)
+  })
+
+  test('opens when the open prop is true', () => {
+    expect(screen.getByText('Top')).toBeInTheDocument()
   })
 })
