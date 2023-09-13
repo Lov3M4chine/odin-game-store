@@ -2,6 +2,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from 'styling/theme'
 import NavOverlay from './NavOverlay'
 import { DrawerProvider } from 'contexts/DrawerContext'
+import GameCardContainer from './GameCardContainer'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <DrawerProvider>
         <NavOverlay />
       </DrawerProvider>
+      <GameCardContainer />
     </ThemeProvider>
   )
 }
