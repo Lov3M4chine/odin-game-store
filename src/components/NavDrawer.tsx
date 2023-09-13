@@ -64,12 +64,19 @@ function CustomListItem({ icon, text }: CustomListItemProps) {
   )
 }
 
-export default function NavDrawer() {
+interface NavDrawerProps {
+  open: boolean
+  onClose: () => void
+}
+
+export const NavDrawer: React.FC<NavDrawerProps> = ({ open, onClose }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Drawer
-        variant="permanent"
+        open={open}
+        onClose={onClose}
+        variant="persistent"
         sx={{
           width: drawerWidth,
           flexShrink: 0,

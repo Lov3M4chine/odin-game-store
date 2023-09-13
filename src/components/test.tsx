@@ -1,12 +1,12 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import NavDrawer from './NavDrawer'
+import { NavDrawer } from './NavDrawer'
 import { topMenuItems, platformMenuItems, genreMenuItems } from './NavDrawer'
 import '@testing-library/jest-dom/extend-expect'
 
 describe('NavDrawer Component', () => {
   beforeEach(() => {
-    render(<NavDrawer />)
+    render(<NavDrawer open={true} onClose={() => {}} />)
   })
 
   // Test to check if the Drawer component is rendered
