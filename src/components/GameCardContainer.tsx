@@ -1,19 +1,26 @@
-import { StyledGameCardWrapper } from 'styling/GameCardStyles'
+import {
+  StyledGameCardContainerWrapper,
+  StyledGameCardWrapper
+} from 'styling/GameCardStyles'
 import GameCard from './Card'
+import { Typography } from '@mui/material'
 
 export default function GameCardContainer() {
   return (
     <>
-      <StyledGameCardWrapper>
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-      </StyledGameCardWrapper>
+      <StyledGameCardContainerWrapper>
+        <Typography variant="h3">Coming Soon</Typography>
+        <StyledGameCardWrapper>
+          <GameCard />
+          <GameCard />
+          <GameCard />
+          <GameCard />
+          <GameCard />
+          <GameCard />
+          <GameCard />
+          <GameCard />
+        </StyledGameCardWrapper>
+      </StyledGameCardContainerWrapper>
     </>
   )
 }
