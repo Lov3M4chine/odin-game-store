@@ -1,5 +1,13 @@
+import { ThemeProvider } from '@mui/material/styles'
+import theme from 'styling/theme'
+import NavOverlay from './NavOverlay'
+
 function App() {
-  return <div></div>
+  return (
+    <ThemeProvider theme={theme}>
+      <NavOverlay />
+    </ThemeProvider>
+  )
 }
 
 export default App
