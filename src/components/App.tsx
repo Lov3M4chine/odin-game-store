@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from 'styling/theme'
 import { DrawerProvider } from 'contexts/DrawerContext'
 import GameCardContainer from './GameCardContainer'
-import NavOverlay from './NavBar'
+import NavOverlay from './NavOverlay'
 
 function App() {
   return (
