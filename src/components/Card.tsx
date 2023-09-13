@@ -22,9 +22,12 @@ export default function GameCard() {
           alt="green iguana"
         />
         <CardContent sx={{ paddingBottom: 1 }}>
-          <Typography gutterBottom variant="h5" component="div">
-            Starfield
-          </Typography>
+          <div className="flex items-center justify-between">
+            <Typography gutterBottom variant="h5" component="div">
+              Starfield
+            </Typography>
+            <Typography>$69.99</Typography>
+          </div>
           <Typography sx={{ display: 'flex', gap: 4 }}>
             <XboxIcon />
             <PlaystationIcon />
