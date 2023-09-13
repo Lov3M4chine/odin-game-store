@@ -26,20 +26,20 @@ import ShooterIcon from './Icons/ShooterIcon'
 
 const drawerWidth = 240
 
-const topMenuItems = [
+export const topMenuItems = [
   { icon: <HourglassTopIcon />, text: 'Coming Soon' },
   { icon: <MoreTimeIcon />, text: 'Recently Released' },
   { icon: <WhatshotIcon />, text: 'Top 100' }
 ]
 
-const platformMenuItems = [
+export const platformMenuItems = [
   { icon: <XboxIcon />, text: 'Xbox' },
   { icon: <PlaystationIcon />, text: 'Playstation' },
   { icon: <PCIcon />, text: 'PC' },
   { icon: <SwitchIcon />, text: 'Switch' }
 ]
 
-const genreMenuItems = [
+export const genreMenuItems = [
   { icon: <HikingIcon />, text: 'Adventure' },
   { icon: <ReduceCapacityIcon />, text: 'Indie' },
   { icon: <RPGIcon />, text: 'Role-playing (RPG)' },
