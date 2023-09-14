@@ -1,11 +1,4 @@
-// Utility to handle async errors
-export function asyncHandler(fn) {
-  return function (req, res, next) {
-    return Promise.resolve(fn(req, res, next)).catch(next)
-  }
-}
-
-export function handleErrors(error, req, res, _next) {
+export default function handleErrors(error, req, res, _next) {
   console.error(error.stack)
 
   // You might encounter this error if there's a wrong syntax in your SQL queries.
