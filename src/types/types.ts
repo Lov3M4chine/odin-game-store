@@ -62,3 +62,11 @@ export type PlatformIconsType = {
   Switch?: JSX.Element
   [key: string]: JSX.Element | undefined
 }
+
+export type GameCardProps = {
+  game: Game
+}
+
+export interface GameDisplaySectionProps {
+  game: Game
+}

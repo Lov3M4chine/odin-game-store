@@ -1,19 +1,19 @@
+import { errorHandler, handleBackendErrors } from 'errorHandlers'
 import { Game } from 'types/types'
 
-export const getGamesWithDetails = async (): Promise<Game[]> => {
+export const getRecentlyReleasedGames = async (): Promise<Game[]> => {
   try {
-    const response = await fetch('http://localhost:3001/fetchGames')
-    if (!response.ok) {
-      throw new Error(
-        `Network response was not ok: ${response.status} - ${response.statusText}`
-      )
-    }
+    const dataType = 'recentlyReleased'
+    const response = await fetch(
+      `http://localhost:3001/fetchGames?dataType=${dataType}`
+    )
+
+    await handleBackendErrors(response)
 
     const games: Game[] = await response.json()
     console.log(games)
     return games
   } catch (error) {
-    console.error('Error fetching games:', error)
-    throw error
+    return errorHandler(error as Error)
   }
 }

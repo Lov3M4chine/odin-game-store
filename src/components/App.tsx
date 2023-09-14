@@ -1,12 +1,12 @@
 import { ThemeProvider } from '@mui/material/styles'
 import theme from 'styling/theme'
-import GameCardContainer from './GameCardContainer'
+import BasicGameCardContainer from './BasicGameCard/BasicGameCardContainer'
 import NavOverlay from './NavOverlay'
 import { useEffect, useState } from 'react'
 import { Game } from 'types/types'
 import { GamesContext } from 'contexts/contexts'
 import { DrawerProvider } from './NavDrawer'
-import { getGamesWithDetails } from 'services/igdbGameService'
+import { getRecentlyReleasedGames } from 'services/igdbGameService'
 
 function App() {
   const [games, setGames] = useState<Game[]>([])
@@ -18,7 +18,7 @@ function App() {
     if (cachedData && cachedData.games) {
       setGames(cachedData.games)
     } else {
-      getGamesWithDetails()
+      getRecentlyReleasedGames()
         .then((data) => {
           setGames(data)
         })
@@ -32,7 +32,7 @@ function App() {
         <DrawerProvider>
           <NavOverlay />
         </DrawerProvider>
-        <GameCardContainer />
+        <BasicGameCardContainer />
       </ThemeProvider>
     </GamesContext.Provider>
   )
