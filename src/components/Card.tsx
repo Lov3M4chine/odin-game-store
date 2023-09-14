@@ -11,14 +11,14 @@ export default function GameCard({ game }: { game: Game }) {
   const coverURL = game.cover?.url
 
   return (
-    <Card sx={{ width: 300, height: 465, margin: 3, borderRadius: '1rem' }}>
+    <Card sx={{ width: 300, height: 485, margin: 3, borderRadius: '1rem' }}>
       <CardActionArea>
         {coverURL ? (
           <CardMedia
             sx={{
               width: '100%', // Full width of the container
-              height: 350, // Full height of the container
-              objectFit: 'cover'
+              height: 374, // Full height of the container
+              objectFit: 'fill'
             }}
             component="img"
             image={coverURL}
