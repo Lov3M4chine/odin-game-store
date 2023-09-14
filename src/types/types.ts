@@ -1,11 +1,25 @@
 import { ReactNode } from 'react'
 
 export type Game = {
-  cover: number
-  genre: number[]
-  platforms: number[]
-  screenshots: number[]
+  name: string
+  id: number
   summary: string
+  cover: {
+    id: number
+    url: string
+  }
+  genres: {
+    id: number
+    name: string
+  }[]
+  platforms: {
+    id: number
+    name: string
+  }[]
+  screenshots: {
+    id: number
+    url: string
+  }[]
 }
 
 export type DrawerStates = {
@@ -37,4 +51,14 @@ export type NavDrawerListItemProps = {
 export interface NavDrawerToggleProps {
   open: boolean
   onClose: () => void
+}
+
+export type PlatformName = 'Xbox' | 'Playstation' | 'PC' | 'Switch'
+
+export type PlatformIconsType = {
+  Xbox?: JSX.Element
+  Playstation?: JSX.Element
+  PC?: JSX.Element
+  Switch?: JSX.Element
+  [key: string]: JSX.Element | undefined
 }

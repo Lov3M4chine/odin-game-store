@@ -15,8 +15,7 @@ import {
   StyledInputBase
 } from 'styling/NavBarStyles'
 import ShoppingCartDrawer from './ShoppingCartDrawer'
-import { useDrawer } from 'contexts/DrawerContext'
-import { NavDrawer } from './NavDrawer'
+import { NavDrawer, useDrawer } from './NavDrawer'
 
 export default function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()

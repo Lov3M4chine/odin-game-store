@@ -23,9 +23,41 @@ import SwitchIcon from './Icons/SwitchIcon'
 import RPGIcon from './Icons/RPGIcon'
 import StrategyIcon from './Icons/StrategyIcon'
 import ShooterIcon from './Icons/ShooterIcon'
-import { NavDrawerListItemProps, NavDrawerToggleProps } from 'types/types'
+import {
+  DrawerProviderProps,
+  DrawerStates,
+  DrawerToggleCallback,
+  NavDrawerListItemProps,
+  NavDrawerToggleProps
+} from 'types/types'
+import { DrawerContext } from 'contexts/contexts'
 
 const drawerWidth = 240
+
+export const useDrawer = () => {
+  const context = React.useContext(DrawerContext)
+  if (!context) {
+    throw new Error('useDrawer must be used within a DrawerProvider')
+  }
+  return context
+}
+
+export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
+  const [drawerStates, setDrawerStates] = React.useState<DrawerStates>({
+    navDrawerOpen: true,
+    cartDrawerOpen: false
+  })
+
+  const toggleDrawer: DrawerToggleCallback = (drawer) => {
+    setDrawerStates((prev) => ({ ...prev, [drawer]: !prev[drawer] }))
+  }
+
+  return (
+    <DrawerContext.Provider value={{ drawerStates, toggleDrawer }}>
+      {children}
+    </DrawerContext.Provider>
+  )
+}
 
 export const topMenuItems = [
   { icon: <HourglassTopIcon />, text: 'Coming Soon' },

@@ -4,36 +4,33 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { Button, CardActionArea, CardActions } from '@mui/material'
-import XboxIcon from './Icons/XboxIcon'
-import PlaystationIcon from './Icons/PlaystationIcon'
-import SwitchIcon from './Icons/SwitchIcon'
-import PCIcon from './Icons/PCIcon'
+import { Game } from 'types/types'
+import { DynamicFontSizeTypography } from './DynamicFontSize'
 
-export default function GameCard() {
+export default function GameCard({ game }: { game: Game }) {
+  const coverURL = game.cover?.url
+
   return (
-    <Card
-      sx={{ maxWidth: 300, maxHeight: 490, margin: 3, borderRadius: '1rem' }}
-    >
+    <Card sx={{ width: 250, height: 450, margin: 3, borderRadius: '1rem' }}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="src/assets/test.png"
-          alt="green iguana"
-        />
+        {coverURL ? (
+          <CardMedia
+            sx={{
+              width: '100%', // Full width of the container
+              height: 350, // Full height of the container
+              objectFit: 'cover'
+            }}
+            component="img"
+            image={coverURL}
+            alt={`${game.name} cover`}
+          />
+        ) : null}
         <CardContent sx={{ paddingBottom: 1 }}>
           <div className="flex items-center justify-between">
-            <Typography gutterBottom variant="h5" component="div">
-              Starfield
-            </Typography>
-            <Typography>$69.99</Typography>
+            <DynamicFontSizeTypography text={game.name} />
+            <Typography sx={{ padding: 1 }}>$69.99</Typography>
           </div>
-          <Typography sx={{ display: 'flex', gap: 4 }}>
-            <XboxIcon />
-            <PlaystationIcon />
-            <PCIcon />
-            <SwitchIcon />
-          </Typography>
+          <Typography sx={{ display: 'flex', gap: 4 }}></Typography>
         </CardContent>
       </CardActionArea>
       <CardActions

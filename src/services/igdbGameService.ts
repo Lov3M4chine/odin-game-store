@@ -1,34 +1,17 @@
 import { Game } from 'types/types'
-import { getIGDBAccessToken } from './auth'
-import { getEnvVariable } from 'utils/envUtils'
 
-const IGDB_API_ENDPOINT = 'https://api.igdb.com/v4/games'
-const CLIENT_ID = getEnvVariable('REACT_APP_CLIENT_ID')
-
-// Fetches game details from IGDB.
-export const fetchGames = async (): Promise<Game[]> => {
-  const accessToken = await getIGDBAccessToken()
-
+export const getGamesWithDetails = async (): Promise<Game[]> => {
   try {
-    const response = await fetch(IGDB_API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Client-ID': CLIENT_ID,
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        fields: 'cover,genre,platforms,screenshots,summary'
-      })
-    })
-
+    const response = await fetch('http://localhost:3001/fetchGames')
     if (!response.ok) {
-      throw new Error('Network response was not ok')
+      throw new Error(
+        `Network response was not ok: ${response.status} - ${response.statusText}`
+      )
     }
 
-    const data = await response.json()
-    sessionStorage.setItem('gamesData', JSON.stringify(data))
-    return data
+    const games: Game[] = await response.json()
+    console.log(games)
+    return games
   } catch (error) {
     console.error('Error fetching games:', error)
     throw error
