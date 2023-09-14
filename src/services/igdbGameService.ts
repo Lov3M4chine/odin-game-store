@@ -10,7 +10,7 @@ export const getGames = async (dataType: string): Promise<Game[]> => {
     await handleBackendErrors(response)
 
     const games: Game[] = await response.json()
-    console.log('Recently Released:', games)
+    console.log(dataType, ':', games)
 
     return games
   } catch (error) {

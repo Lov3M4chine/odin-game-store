@@ -22,10 +22,35 @@ export function replaceCoverSize(url, size = 't_cover_big') {
 
 export function determineDataFieldParameters(dataType) {
   switch (dataType) {
+    // Top
     case 'recentlyReleased':
-      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2022; sort release_dates.y desc; limit 10;'
+      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2023; sort release_dates.y desc; limit 10;'
     case 'top100':
-      return 'fields name, ... ; your request data for top100'
+      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2022; sort release_dates.y asc; limit 10;'
+    case 'comingSoon':
+      return `fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > ${Date.now()}; sort release_dates.y desc; limit 10;`
+    // Platforms
+    case 'xbox':
+      return 'fields name;'
+    case 'playstation':
+      return 'fields name;'
+    case 'pc':
+      return 'fields name;'
+    case 'switch':
+      return 'fields name;'
+    // Genre
+    case 'adventure':
+      return 'fields name;'
+    case 'indie':
+      return 'fields name;'
+    case 'RPG':
+      return 'fields name;'
+    case 'strategy':
+      return 'fields name;'
+    case 'puzzle':
+      return 'fields name;'
+    case 'shooter':
+      return 'fields name;'
     default:
       throw {
         name: 'UnsupportedDataTypeError',
