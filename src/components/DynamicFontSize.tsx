@@ -14,7 +14,7 @@ export const DynamicFontSizeTypography: React.FC<
     if (textRef.current) {
       // Checking if the ref is not null
       const element = textRef.current
-      let fontSize = 10 // Start from a base size. Adjust as needed.
+      let fontSize = 16 // Start from a base size. Adjust as needed.
 
       // Reduce font size until the text fits or the font size is too small
       while (element.scrollWidth > element.offsetWidth && fontSize > 6) {
@@ -32,7 +32,8 @@ export const DynamicFontSizeTypography: React.FC<
       ref={textRef}
       style={{
         whiteSpace: 'nowrap',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
       }}
     >
       {text}
