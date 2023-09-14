@@ -12,7 +12,7 @@ export default function GameCardContainer() {
   return (
     <>
       <StyledGameCardContainerWrapper>
-        <Typography variant="h3">Coming Soon</Typography>
+        <Typography variant="h3">Recently Released</Typography>
         <StyledGameCardWrapper>
           {games?.map((game) => <GameCard key={game.name} game={game} />)}
         </StyledGameCardWrapper>

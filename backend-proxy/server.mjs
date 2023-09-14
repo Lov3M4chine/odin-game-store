@@ -59,7 +59,7 @@ app.get('/fetchGames', async (req, res) => {
         'Client-ID': process.env.IGDB_CLIENT_ID,
         Authorization: `Bearer ${accessToken}`
       },
-      data: 'fields name,summary,cover.url,genres,platforms.name,screenshots.url,rating,release_dates.y; where platforms = 6 & rating != null & cover.url != null; sort rating desc; limit 500;'
+      data: 'fields name,summary,cover.url,genres,platforms.name,screenshots.url,rating,release_dates.y; where platforms = 6 & cover.url != null & release_dates.y > 2022; sort release_dates.y desc; limit 500;'
     })
 
     console.log(JSON.stringify(response.data, null, 2))

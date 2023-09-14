@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography'
 import { Button, CardActionArea, CardActions } from '@mui/material'
 import { Game } from 'types/types'
 import { DynamicFontSizeTypography } from './DynamicFontSize'
+import XboxIcon from './Icons/XboxIcon'
 
 export default function GameCard({ game }: { game: Game }) {
   const coverURL = game.cover?.url
 
   return (
-    <Card sx={{ width: 300, height: 485, margin: 3, borderRadius: '1rem' }}>
+    <Card sx={{ width: 300, height: 520, margin: 3, borderRadius: '1rem' }}>
       <CardActionArea>
         {coverURL ? (
           <CardMedia
@@ -29,7 +30,9 @@ export default function GameCard({ game }: { game: Game }) {
           <div className="flex items-center justify-center">
             <DynamicFontSizeTypography text={game.name} />
           </div>
-          <Typography sx={{ display: 'flex', gap: 4 }}></Typography>
+          <Typography sx={{ display: 'flex', gap: 4 }}>
+            <XboxIcon />
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions
