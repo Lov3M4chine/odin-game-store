@@ -11,7 +11,7 @@ export default function GameCard({ game }: { game: Game }) {
   const coverURL = game.cover?.url
 
   return (
-    <Card sx={{ width: 250, height: 450, margin: 3, borderRadius: '1rem' }}>
+    <Card sx={{ width: 300, height: 465, margin: 3, borderRadius: '1rem' }}>
       <CardActionArea>
         {coverURL ? (
           <CardMedia
@@ -28,7 +28,6 @@ export default function GameCard({ game }: { game: Game }) {
         <CardContent sx={{ paddingBottom: 1 }}>
           <div className="flex items-center justify-between">
             <DynamicFontSizeTypography text={game.name} />
-            <Typography sx={{ padding: 1 }}>$69.99</Typography>
           </div>
           <Typography sx={{ display: 'flex', gap: 4 }}></Typography>
         </CardContent>
@@ -40,10 +39,11 @@ export default function GameCard({ game }: { game: Game }) {
           paddingTop: 0.5
         }}
       >
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" variant="contained">
           Details
         </Button>
-        <Button size="small" color="secondary">
+        <Typography sx={{ fontSize: 15, padding: 1 }}>$69.99</Typography>
+        <Button size="small" color="secondary" variant="contained">
           Add to Cart
         </Button>
       </CardActions>
