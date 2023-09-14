@@ -26,7 +26,7 @@ export default function GameCard({ game }: { game: Game }) {
           />
         ) : null}
         <CardContent sx={{ paddingBottom: 1 }}>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <DynamicFontSizeTypography text={game.name} />
           </div>
           <Typography sx={{ display: 'flex', gap: 4 }}></Typography>
