@@ -46,6 +46,7 @@ export interface ToggleableComponentProps {
 export type NavDrawerListItemProps = {
   icon: React.ReactNode
   text: string
+  type?: string
 }
 
 export interface NavDrawerToggleProps {
@@ -69,4 +70,14 @@ export type GameCardProps = {
 
 export interface GameDisplaySectionProps {
   game: Game
+}
+
+export type GamesContextType = {
+  games: Game[]
+  setGames: React.Dispatch<React.SetStateAction<Game[]>>
+}
+
+export type DataTypeContextType = {
+  dataType: string
+  setDataType: (dataType: string) => void
 }

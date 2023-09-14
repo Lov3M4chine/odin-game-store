@@ -3,18 +3,21 @@ import {
   StyledGameCardWrapper
 } from 'styling/GameCardStyles'
 import { Typography } from '@mui/material'
-import { useContext } from 'react'
-import { GamesContext } from 'contexts/contexts'
 import BasicGameCard from './BasicGameCard'
+import { Game } from 'types/types'
+import { useGames } from 'hooks/useGames'
 
 export default function BasicGameCardContainer() {
-  const games = useContext(GamesContext)
+  const { games } = useGames()
+
   return (
     <>
       <StyledGameCardContainerWrapper>
         <Typography variant="h3">Recently Released</Typography>
         <StyledGameCardWrapper>
-          {games?.map((game) => <BasicGameCard key={game.id} game={game} />)}
+          {games.map((game: Game) => (
+            <BasicGameCard key={game.id} game={game} />
+          ))}
         </StyledGameCardWrapper>
       </StyledGameCardContainerWrapper>
     </>

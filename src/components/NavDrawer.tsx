@@ -30,17 +30,9 @@ import {
   NavDrawerListItemProps,
   NavDrawerToggleProps
 } from 'types/types'
-import { DrawerContext } from 'contexts/contexts'
+import { DrawerContext, useDataType } from 'contexts/contexts'
 
 const drawerWidth = 240
-
-export const useDrawer = () => {
-  const context = React.useContext(DrawerContext)
-  if (!context) {
-    throw new Error('useDrawer must be used within a DrawerProvider')
-  }
-  return context
-}
 
 export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
   const [drawerStates, setDrawerStates] = React.useState<DrawerStates>({
@@ -60,9 +52,13 @@ export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
 }
 
 export const topMenuItems = [
-  { icon: <HourglassTopIcon />, text: 'Coming Soon' },
-  { icon: <MoreTimeIcon />, text: 'Recently Released' },
-  { icon: <WhatshotIcon />, text: 'Top 100' }
+  { icon: <HourglassTopIcon />, text: 'Coming Soon', type: 'comingSoon' },
+  {
+    icon: <MoreTimeIcon />,
+    text: 'Recently Released',
+    type: 'recentlyReleased'
+  },
+  { icon: <WhatshotIcon />, text: 'Top 100', type: 'top100' }
 ]
 
 export const platformMenuItems = [
@@ -81,9 +77,15 @@ export const genreMenuItems = [
   { icon: <ShooterIcon />, text: 'Shooter' }
 ]
 
-function CustomListItem({ icon, text }: NavDrawerListItemProps) {
+function CustomListItem({ icon, text, type }: NavDrawerListItemProps) {
+  const { setDataType } = useDataType()
+
+  const handleClick = () => {
+    if (type) setDataType(type)
+  }
+
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding onClick={handleClick}>
       <ListItemButton>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />

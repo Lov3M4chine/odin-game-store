@@ -1,9 +1,8 @@
 import { errorHandler, handleBackendErrors } from 'errorHandlers'
 import { Game } from 'types/types'
 
-export const getRecentlyReleasedGames = async (): Promise<Game[]> => {
+export const getGames = async (dataType: string): Promise<Game[]> => {
   try {
-    const dataType = 'recentlyReleased'
     const response = await fetch(
       `http://localhost:3001/fetchGames?dataType=${dataType}`
     )
@@ -11,7 +10,8 @@ export const getRecentlyReleasedGames = async (): Promise<Game[]> => {
     await handleBackendErrors(response)
 
     const games: Game[] = await response.json()
-    console.log(games)
+    console.log('Recently Released:', games)
+
     return games
   } catch (error) {
     return errorHandler(error as Error)
