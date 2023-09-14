@@ -1,54 +1,34 @@
 import express from 'express'
 import axios from 'axios'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import NodeCache from 'node-cache'
-
-dotenv.config()
+import { checkCache, getCache } from './cache.js'
+import { getIGDBAccessToken } from './auth.js'
 
 const app = express()
 const PORT = 3001
-const TWITCH_TOKEN_ENDPOINT = 'https://id.twitch.tv/oauth2/token'
+const { IGDB_CLIENT_ID, IGDB_SECRET } = process.env
+const gamesCache = new NodeCache({ stdTTL: 24 * 60 * 60 })
 
-async function getIGDBAccessToken() {
-  const { IGDB_CLIENT_ID, IGDB_SECRET } = process.env
-  if (!IGDB_CLIENT_ID || !IGDB_SECRET) {
-    console.error(
-      'Missing environment variables. Please ensure all required variables are set.'
-    )
-    process.exit(1)
-  }
-
-  const url = `${TWITCH_TOKEN_ENDPOINT}?client_id=${IGDB_CLIENT_ID}&client_secret=${IGDB_SECRET}&grant_type=client_credentials`
-
-  const response = await axios.post(url)
-
-  if (response.status < 200 || response.status >= 300) {
-    throw new Error('Failed to obtain access token')
-  }
-
-  return response.data.access_token
+if (!IGDB_CLIENT_ID || !IGDB_SECRET) {
+  console.error('Missing environment variables. Exiting.')
+  process.exit(1)
 }
 
 function replaceCoverSize(url, size = 't_cover_big') {
-  if (!url) return url // Check to make sure the url exists
+  if (!url) return url
   return url.replace(/t_[a-z_]+/, size)
 }
 
-// Setting up the cache
-const myCache = new NodeCache({ stdTTL: 24 * 60 * 60 }) // Standard TTL as 24h
-
-// Enable CORS for all routes
 app.use(cors())
+app.use('/fetchGames', (req, res, next) =>
+  checkCache(req, res, next, 'gamesData')
+)
+app.use('/fetchGames', getCache)
 
 app.get('/fetchGames', async (req, res) => {
-  // Check if data is in cache
-  const cachedGames = myCache.get('gamesData')
-  if (cachedGames) {
-    return res.json(cachedGames)
-  }
-
   try {
+    console.log('Fetching from API')
     const accessToken = await getIGDBAccessToken()
 
     const response = await axios({
@@ -59,7 +39,7 @@ app.get('/fetchGames', async (req, res) => {
         'Client-ID': process.env.IGDB_CLIENT_ID,
         Authorization: `Bearer ${accessToken}`
       },
-      data: 'fields name,summary,cover.url,genres,platforms.name,screenshots.url,rating,release_dates.y; where platforms = 6 & cover.url != null & release_dates.y > 2022; sort release_dates.y desc; limit 500;'
+      data: 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2022; sort release_dates.y desc; limit 10;'
     })
 
     console.log(JSON.stringify(response.data, null, 2))
@@ -91,7 +71,7 @@ app.get('/fetchGames', async (req, res) => {
       return game
     })
 
-    myCache.set('gamesData', gameData)
+    gamesCache.set('gamesData', gameData) // Store in cache
     res.json(gameData)
   } catch (error) {
     console.error(
