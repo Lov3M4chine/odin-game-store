@@ -7,12 +7,13 @@ import {
 } from '@mui/material'
 import { GameDisplaySectionProps } from 'types/types'
 import { DynamicFontSizeTypography } from '../DynamicFontSize'
-import XboxIcon from '../Icons/XboxIcon'
+import { getPlatformIcon, groupPlatforms } from 'helpers'
 
 const BasicGameDisplaySection: React.FC<GameDisplaySectionProps> = ({
   game
 }) => {
   const coverURL = game.cover?.url
+  const platformGroups = groupPlatforms(game.platforms)
 
   return (
     <CardActionArea>
@@ -33,7 +34,12 @@ const BasicGameDisplaySection: React.FC<GameDisplaySectionProps> = ({
           <DynamicFontSizeTypography text={game.name} />
         </div>
         <Typography sx={{ display: 'flex', gap: 4 }}>
-          <XboxIcon />
+          {platformGroups.map((groupName) => {
+            const iconElement = getPlatformIcon(groupName)
+            return (
+              <React.Fragment key={groupName}>{iconElement}</React.Fragment>
+            )
+          })}
         </Typography>
       </CardContent>
     </CardActionArea>

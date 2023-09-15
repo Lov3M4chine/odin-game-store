@@ -21,12 +21,10 @@ export function replaceCoverSize(url, size = 't_cover_big') {
 }
 
 export function determineDataFieldParameters(dataType) {
-  const unixTimestamp = Math.floor(Date.now() / 1000)
-
   switch (dataType) {
     // Top
     case 'recentlyReleased':
-      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2023; sort release_dates.y desc; limit 100;'
+      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2023; sort release_dates.y desc; limit 1;'
     case 'top100':
       return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2022; sort release_dates.y asc; limit 10;'
     case 'comingSoon':

@@ -7,6 +7,7 @@ import {
   logAPIErrorResponse,
   validateIGDBResponse
 } from './errorHandlers/validateFunctions.js'
+import fetchGenresByIds from './fetchGenres.js'
 
 export default async function fetchGames(req, res, next) {
   try {
@@ -16,6 +17,7 @@ export default async function fetchGames(req, res, next) {
     const data = req.dataFieldParameters
     const dataType = req.query.dataType
 
+    // Initial fetch from the API
     const response = await axios({
       method: 'post',
       url: endpoint,
@@ -28,9 +30,27 @@ export default async function fetchGames(req, res, next) {
     })
 
     validateIGDBResponse(response)
-    const gameData = response.data.map((game) => processGameImages(game))
-    setCache(`gamesData-${dataType}`, gameData)
-    res.json(gameData)
+
+    // Process and prepare initial data
+    const games = response.data.map((game) => processGameImages(game))
+
+    // Extract unique genre by ID
+    const uniqueGenreIds = [...new Set(games.flatMap((game) => game.genres))]
+
+    // Parallel fetches for additional data
+    const [genresData] = await Promise.all([
+      fetchGenresByIds(uniqueGenreIds, accessToken)
+    ])
+
+    // Enrich primary data with additional data
+    const enrichedGames = games.map((game) => ({
+      ...game,
+      genres: game.genres.map((id) => genresData[id] || id)
+    }))
+
+    //Set cache with enriched data
+    setCache(`gamesData-${dataType}`, enrichedGames)
+    res.json(enrichedGames)
   } catch (error) {
     if (!(error instanceof IGDBError || error instanceof APIResponseError)) {
       logAPIErrorResponse(error)
