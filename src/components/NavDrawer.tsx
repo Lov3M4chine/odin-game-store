@@ -81,7 +81,9 @@ function CustomListItem({ icon, text, type }: NavDrawerListItemProps) {
   const { setDataType } = useDataType()
 
   const handleClick = () => {
-    if (type) setDataType(type)
+    if (type) {
+      setDataType(type)
+    }
   }
 
   return (

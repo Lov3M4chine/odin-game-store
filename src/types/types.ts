@@ -75,6 +75,7 @@ export interface GameDisplaySectionProps {
 export type GamesContextType = {
   games: Game[]
   setGames: React.Dispatch<React.SetStateAction<Game[]>>
+  fetchGames: (type: string) => Promise<void>
 }
 
 export type DataTypeContextType = {

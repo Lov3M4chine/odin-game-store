@@ -12,9 +12,9 @@ export default async function fetchGames(req, res, next) {
   try {
     console.log('Fetching from API...')
     const accessToken = await getIGDBAccessToken()
-
     const endpoint = req.endpoint
     const data = req.dataFieldParameters
+    const dataType = req.query.dataType
 
     const response = await axios({
       method: 'post',
@@ -29,7 +29,7 @@ export default async function fetchGames(req, res, next) {
 
     validateIGDBResponse(response)
     const gameData = response.data.map((game) => processGameImages(game))
-    setCache('gamesData', gameData)
+    setCache(`gamesData-${dataType}`, gameData)
     res.json(gameData)
   } catch (error) {
     if (!(error instanceof IGDBError || error instanceof APIResponseError)) {

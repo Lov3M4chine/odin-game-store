@@ -17,6 +17,19 @@ import {
 import ShoppingCartDrawer from './ShoppingCartDrawer'
 import { NavDrawer } from './NavDrawer'
 import { useDrawer } from 'hooks/useDrawer'
+import { DataTypeContext } from 'contexts/contexts'
+
+export const DataTypeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children
+}) => {
+  const [dataType, setDataType] = React.useState('recentlyReleased') // Default value
+
+  return (
+    <DataTypeContext.Provider value={{ dataType, setDataType }}>
+      {children}
+    </DataTypeContext.Provider>
+  )
+}
 
 export default function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()

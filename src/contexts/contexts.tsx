@@ -1,7 +1,15 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
+import { getGames } from 'services/igdbGameService'
 import {
   DataTypeContextType,
   DrawerContextType,
+  Game,
   GamesContextType
 } from 'types/types'
 
@@ -35,4 +43,43 @@ export const useDataType = () => {
     throw new Error('useDataType must be used within a DataTypeProvider')
   }
   return context
+}
+
+export const GamesProvider: React.FC<{ children: ReactNode }> = ({
+  children
+}) => {
+  const [games, setGames] = useState<Game[]>([])
+  const dataType = useContext(DataTypeContext)?.dataType || 'recentlyReleased'
+
+  const fetchAndCacheGames = async (type: string) => {
+    try {
+      const fetchedGames = await getGames(type)
+      setGames(fetchedGames)
+      sessionStorage.setItem(
+        `gamesData-${type}`,
+        JSON.stringify({ games: fetchedGames })
+      )
+    } catch (error) {
+      console.error('Failed fetching game data', error)
+    }
+  }
+
+  useEffect(() => {
+    const cachedDataString = sessionStorage.getItem(`gamesData-${dataType}`)
+    const cachedData = cachedDataString ? JSON.parse(cachedDataString) : null
+
+    if (cachedData && cachedData.games) {
+      setGames(cachedData.games)
+    } else {
+      fetchAndCacheGames(dataType)
+    }
+  }, [dataType])
+
+  return (
+    <GamesContext.Provider
+      value={{ games, setGames, fetchGames: fetchAndCacheGames }}
+    >
+      {children}
+    </GamesContext.Provider>
+  )
 }
