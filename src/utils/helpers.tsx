@@ -1,23 +1,12 @@
+import { PCIcon, PlaystationIcon, SwitchIcon, XboxIcon } from 'components/Icons'
 import React from 'react'
-import PCIcon from 'components/Icons/PCIcon'
-import PlaystationIcon from 'components/Icons/PlaystationIcon'
-import SwitchIcon from 'components/Icons/SwitchIcon'
-import XboxIcon from 'components/Icons/XboxIcon'
-
-type PlatformIconMapping = {
-  [key: string]: React.ReactElement
-}
+import { Platform, PlatformIconMapping } from 'types'
 
 export const platformIconMapping: PlatformIconMapping = {
   Xbox: <XboxIcon />,
   PlayStation: <PlaystationIcon />,
   PC: <PCIcon />,
   Switch: <SwitchIcon />
-}
-
-type Platform = {
-  id: number
-  name: string
 }
 
 export function groupPlatforms(platforms: Platform[]): string[] {

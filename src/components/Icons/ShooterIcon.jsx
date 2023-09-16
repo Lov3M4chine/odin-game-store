@@ -1,6 +1,4 @@
-import React from 'react'
-
-export default function ShooterIcon() {
+export function ShooterIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

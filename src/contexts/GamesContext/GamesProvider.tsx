@@ -1,53 +1,8 @@
-import React, {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from 'react'
+import { ReactNode, useContext, useEffect, useState } from 'react'
 import { getGames } from 'services/igdbGameService'
-import {
-  DataTypeContextType,
-  DataTypeValue,
-  DrawerContextType,
-  Game,
-  GamesContextType
-} from 'types/types'
-
-export const DrawerContext = createContext<DrawerContextType | undefined>(
-  undefined
-)
-
-export const GamesContext = React.createContext<GamesContextType | undefined>(
-  undefined
-)
-
-export const DataTypeContext = createContext<DataTypeContextType | undefined>(
-  undefined
-)
-
-export const DataTypeProvider: React.FC<{ children: ReactNode }> = ({
-  children
-}) => {
-  const [dataType, setDataType] = useState<DataTypeValue>({
-    type: 'recentlyReleased',
-    title: 'Recently Released'
-  })
-
-  return (
-    <DataTypeContext.Provider value={{ dataType, setDataType }}>
-      {children}
-    </DataTypeContext.Provider>
-  )
-}
-
-export const useDataType = () => {
-  const context = useContext(DataTypeContext)
-  if (!context) {
-    throw new Error('useDataType must be used within a DataTypeProvider')
-  }
-  return context
-}
+import { Game } from 'types'
+import { GamesContext } from './GamesContext'
+import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
 
 export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children

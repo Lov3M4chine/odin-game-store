@@ -1,9 +1,10 @@
-import { ThemeProvider } from '@mui/material/styles'
-import theme from 'styling/theme'
-import BasicGameCardContainer from './BasicGameCard/BasicGameCardContainer'
-import NavOverlay from './NavOverlay'
-import { DataTypeProvider, GamesProvider } from 'contexts/contexts'
-import { DrawerProvider } from './NavDrawer'
+import { ThemeProvider } from '@emotion/react'
+import { DataTypeProvider } from 'contexts/DataTypeContext/DataTypeProvider'
+import { DrawerProvider } from 'contexts/DrawerContext/DrawerProvider'
+import { GamesProvider } from 'contexts/GamesContext/GamesProvider'
+import theme from 'theme'
+import { NavOverlay } from './NavOverlay'
+import { BasicGameCardContainer } from './BasicGameCardContainer'
 
 function App() {
   return (

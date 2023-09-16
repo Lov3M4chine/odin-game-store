@@ -1,11 +1,11 @@
+import { Game } from 'types'
 import {
   AppError,
   ClientError,
   NetworkError,
   ServerError,
   UnauthorizedError
-} from 'errorClasses'
-import { Game } from 'types/types'
+} from './errorClasses'
 
 export function logAndThrowError(error: Error, message: string): never {
   console.error(message, error)

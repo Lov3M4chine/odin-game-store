@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { NavDrawer } from './NavDrawer'
+import { NavDrawer } from './NavOverlay/NavDrawer/NavDrawer'
 import IconButton from '@mui/material/IconButton'
-import { topMenuItems, platformMenuItems, genreMenuItems } from './NavDrawer'
+import { topMenuItems, platformMenuItems, genreMenuItems } from './NavOverlay/NavDrawer/NavDrawer'
 import '@testing-library/jest-dom/extend-expect'
 
 type MockFn = {

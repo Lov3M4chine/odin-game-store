@@ -1,15 +1,12 @@
-import {
-  StyledGameCardContainerWrapper,
-  StyledGameCardWrapper
-} from 'styling/GameCardStyles'
 import { Typography } from '@mui/material'
-import BasicGameCard from './BasicGameCard'
-import { Game } from 'types/types'
 import { useGames } from 'hooks/useGames'
 import { useContext } from 'react'
-import { DataTypeContext } from 'contexts/contexts'
+import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
+import { StyledGameCardContainerWrapper, StyledGameCardWrapper } from './styles'
+import { Game } from 'types'
+import { BasicGameCard } from './BasicGameCard/BasicGameCard'
 
-export default function BasicGameCardContainer() {
+export function BasicGameCardContainer() {
   const { games } = useGames()
   const context = useContext(DataTypeContext)
 

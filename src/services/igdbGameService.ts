@@ -1,5 +1,5 @@
 import { errorHandler, handleBackendErrors } from 'errorHandlers'
-import { Game } from 'types/types'
+import { Game } from 'types'
 
 export const getGames = async (dataType: string): Promise<Game[]> => {
   try {

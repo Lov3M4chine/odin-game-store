@@ -1,9 +1,6 @@
-import React, { useRef, useEffect } from 'react'
-import Typography from '@mui/material/Typography'
-
-interface DynamicFontSizeTypographyProps {
-  text: string
-}
+import { Typography } from '@mui/material'
+import { useEffect, useRef } from 'react'
+import { DynamicFontSizeTypographyProps } from 'types'
 
 export const DynamicFontSizeTypography: React.FC<
   DynamicFontSizeTypographyProps
@@ -40,5 +37,3 @@ export const DynamicFontSizeTypography: React.FC<
     </Typography>
   )
 }
-
-export default DynamicFontSizeTypography

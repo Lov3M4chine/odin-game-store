@@ -7,31 +7,14 @@ import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import Logo from './Logo'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase
-} from 'styling/NavBarStyles'
-import ShoppingCartDrawer from './ShoppingCartDrawer'
-import { NavDrawer } from './NavDrawer'
+import ShoppingCartDrawer from './ShoppingCartDrawer/ShoppingCartDrawer'
+import { NavDrawer } from './NavDrawer/NavDrawer'
 import { useDrawer } from 'hooks/useDrawer'
-import { DataTypeContext } from 'contexts/contexts'
+import { Search, SearchIconWrapper, StyledInputBase } from './styles'
+import { Logo } from 'components/Icons'
 
-export const DataTypeProvider: React.FC<{ children: React.ReactNode }> = ({
-  children
-}) => {
-  const [dataType, setDataType] = React.useState('recentlyReleased') // Default value
-
-  return (
-    <DataTypeContext.Provider value={{ dataType, setDataType }}>
-      {children}
-    </DataTypeContext.Provider>
-  )
-}
-
-export default function NavOverlay() {
+export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
 
   return (

@@ -10,9 +10,9 @@ import {
   Drawer
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { ToggleableComponentProps } from 'types/types'
+import { ToggleableComponentProps } from 'types'
 
-const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
+export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
   open,
   onClose
 }) => {

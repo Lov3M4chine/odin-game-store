@@ -1,4 +1,4 @@
-import { DrawerContext } from 'contexts/contexts'
+import { DrawerContext } from 'contexts/DrawerContext/DrawerContext'
 import React from 'react'
 
 export const useDrawer = () => {

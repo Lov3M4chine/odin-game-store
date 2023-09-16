@@ -59,7 +59,7 @@ export type PlatformName = 'Xbox' | 'Playstation' | 'PC' | 'Switch'
 export type Platform = {
   id: number
   name: string
-  platform_logo: string
+  platform_logo?: string
 }
 
 export type PlatformIconsType = {
@@ -92,4 +92,12 @@ export interface DataTypeContextType {
 export interface DataTypeValue {
   type: string
   title: string
+}
+
+export interface DynamicFontSizeTypographyProps {
+  text: string
+}
+
+export type PlatformIconMapping = {
+  [key: string]: React.ReactElement
 }
