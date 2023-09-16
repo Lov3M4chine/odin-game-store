@@ -6,7 +6,6 @@ import Badge from '@mui/material/Badge'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import ShoppingCartDrawer from './ShoppingCartDrawer/ShoppingCartDrawer'
 import { NavDrawer } from './NavDrawer/NavDrawer'
 import { useDrawer } from 'hooks/useDrawer'
 import {
@@ -19,6 +18,7 @@ import {
   StyledTypography
 } from './styles'
 import { Logo } from 'components/Icons'
+import { ShoppingCartDrawer } from './ShoppingCartDrawer'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
