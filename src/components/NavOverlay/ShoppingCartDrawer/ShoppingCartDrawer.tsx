@@ -2,15 +2,14 @@ import React from 'react'
 import {
   Box,
   List,
-  Divider,
   Typography,
   Button,
   ListItem,
-  ListItemText,
-  Drawer
+  ListItemText
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { ToggleableComponentProps } from 'types'
+import { CartDrawer, FooterDivider, HeaderDivider } from './styles'
 
 export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
   open,
@@ -19,12 +18,11 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
   const list = () => (
     <Box role="presentation">
       <List sx={{ mt: 8 }}>
-        <Divider component="div" role="presentation">
+        <HeaderDivider role="presentation">
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ mt: 2 }}
             gap={3}
           >
             <Typography variant="h5" color="primary">
@@ -39,7 +37,7 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
               Clear
             </Button>
           </Box>
-        </Divider>
+        </HeaderDivider>
         {/* Replace with map over cart items */}
         <ListItem>
           <ListItemText primary={'Item 1'} />
@@ -48,7 +46,7 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
           <ListItemText primary={'Item 2'} />
         </ListItem>
         {/* ... */}
-        <Divider sx={{ position: 'fixed', bottom: 0, margin: 2 }}>
+        <FooterDivider>
           <Typography variant="h5" color="primary" display="inline">
             Total:
           </Typography>
@@ -56,21 +54,14 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
             {' '}
             $50
           </Typography>
-        </Divider>
+        </FooterDivider>
       </List>
     </Box>
   )
 
   return (
-    <Drawer
-      anchor="right"
-      open={open}
-      onClose={onClose}
-      sx={{ width: 240, '& .MuiDrawer-paper': { width: 240 } }}
-    >
+    <CartDrawer anchor="right" open={open} onClose={onClose}>
       {list()}
-    </Drawer>
+    </CartDrawer>
   )
 }
-
-export default ShoppingCartDrawer

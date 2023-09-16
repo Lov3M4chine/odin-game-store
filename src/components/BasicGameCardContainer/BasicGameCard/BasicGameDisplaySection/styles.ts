@@ -20,7 +20,7 @@ export const StyledCardContent = styled(CardContent)`
   padding-bottom: 1px;
   .platform-icons {
     display: flex;
-    gap: 4px;
+    gap: 30px;
     padding-bottom: 10px;
   }
 `

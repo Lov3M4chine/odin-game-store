@@ -1,5 +1,7 @@
 import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
+import { AppBar, IconButton, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 export const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -40,3 +42,26 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     }
   }
 }))
+
+export const StyledAppBar = styled(AppBar)`
+  position: fixed;
+  z-index: ${({ theme }) => theme.zIndex.drawer + 1};
+`
+
+export const StyledIconButton = styled(IconButton)`
+  margin-right: 24px;
+`
+
+export const StyledTypography = styled(Typography)`
+  display: none;
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    display: block;
+  }
+`
+
+export const StyledBox = styled(Box)`
+  display: none;
+  ${({ theme }) => theme.breakpoints.up('md')} {
+    display: flex;
+  }
+`

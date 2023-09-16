@@ -1,9 +1,7 @@
 import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Badge from '@mui/material/Badge'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
@@ -11,37 +9,36 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import ShoppingCartDrawer from './ShoppingCartDrawer/ShoppingCartDrawer'
 import { NavDrawer } from './NavDrawer/NavDrawer'
 import { useDrawer } from 'hooks/useDrawer'
-import { Search, SearchIconWrapper, StyledInputBase } from './styles'
+import {
+  Search,
+  SearchIconWrapper,
+  StyledAppBar,
+  StyledBox,
+  StyledIconButton,
+  StyledInputBase,
+  StyledTypography
+} from './styles'
 import { Logo } from 'components/Icons'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
+    <Box flexGrow={1}>
+      <StyledAppBar>
         <Toolbar>
-          <IconButton
+          <StyledIconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="toggle drawer"
-            sx={{ mr: 24 }}
             onClick={() => toggleDrawer('navDrawerOpen')}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
+          </StyledIconButton>
+          <StyledTypography variant="h6" noWrap>
             Galactic Games
-          </Typography>
+          </StyledTypography>
           <Logo />
           <Search>
             <SearchIconWrapper>
@@ -52,8 +49,8 @@ export function NavOverlay() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box flexGrow={1} />
+          <StyledBox>
             <IconButton
               size="large"
               aria-label="show cart items"
@@ -64,9 +61,9 @@ export function NavOverlay() {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-          </Box>
+          </StyledBox>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
       <ShoppingCartDrawer
         open={drawerStates.cartDrawerOpen}
         onClose={() => toggleDrawer('cartDrawerOpen')}
