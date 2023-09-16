@@ -14,7 +14,5 @@ export const StyledDrawer = styled(Drawer)`
 `
 
 export const StyledDivider = styled(Divider)`
-  &:nth-of-type(odd) {
-    margin-top: 16px;
-  }
+  margin-top: 2rem;
 `

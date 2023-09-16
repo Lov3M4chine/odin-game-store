@@ -49,7 +49,7 @@ export const StyledAppBar = styled(AppBar)`
 `
 
 export const StyledIconButton = styled(IconButton)`
-  margin-right: 24px;
+  margin-right: 2rem;
 `
 
 export const StyledTypography = styled(Typography)`
@@ -57,6 +57,7 @@ export const StyledTypography = styled(Typography)`
   ${({ theme }) => theme.breakpoints.up('sm')} {
     display: block;
   }
+  padding-left: 10rem;
 `
 
 export const StyledBox = styled(Box)`

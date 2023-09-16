@@ -17,11 +17,12 @@ export const StyledCardMedia = styled(CardMedia)<ExtendedCardMediaProps>`
 `
 
 export const StyledCardContent = styled(CardContent)`
-  padding-bottom: 1px;
+  padding-bottom: 0.5rem;
   .platform-icons {
     display: flex;
-    gap: 30px;
-    padding-bottom: 10px;
+    items-align: center;
+    gap: 2rem;
+    padding-top: 0.5rem;
   }
 `
 
@@ -32,5 +33,5 @@ export const StyledCenterText = styled.div`
 `
 
 export const StyledCardActionArea = styled(CardActionArea)`
-  height: 500px;
+  height: 32rem;
 `
