@@ -62,19 +62,19 @@ export const topMenuItems = [
 ]
 
 export const platformMenuItems = [
-  { icon: <XboxIcon />, text: 'Xbox' },
-  { icon: <PlaystationIcon />, text: 'Playstation' },
-  { icon: <PCIcon />, text: 'PC' },
-  { icon: <SwitchIcon />, text: 'Switch' }
+  { icon: <XboxIcon />, text: 'Xbox', type: 'xbox' },
+  { icon: <PlaystationIcon />, text: 'Playstation', type: 'playstation' },
+  { icon: <PCIcon />, text: 'PC', type: 'pc' },
+  { icon: <SwitchIcon />, text: 'Switch', type: 'switch' }
 ]
 
 export const genreMenuItems = [
-  { icon: <HikingIcon />, text: 'Adventure' },
-  { icon: <ReduceCapacityIcon />, text: 'Indie' },
-  { icon: <RPGIcon />, text: 'Role-playing (RPG)' },
-  { icon: <StrategyIcon />, text: 'Strategy' },
-  { icon: <ExtensionIcon />, text: 'Puzzle' },
-  { icon: <ShooterIcon />, text: 'Shooter' }
+  { icon: <HikingIcon />, text: 'Adventure', type: 'adventure' },
+  { icon: <ReduceCapacityIcon />, text: 'Indie', type: 'indie' },
+  { icon: <RPGIcon />, text: 'Role-playing (RPG)', type: 'RPG' },
+  { icon: <StrategyIcon />, text: 'Strategy', type: 'strategy' },
+  { icon: <ExtensionIcon />, text: 'Puzzle', type: 'puzzle' },
+  { icon: <ShooterIcon />, text: 'Shooter', type: 'shooter' }
 ]
 
 function CustomListItem({ icon, text, type }: NavDrawerListItemProps) {
@@ -82,7 +82,10 @@ function CustomListItem({ icon, text, type }: NavDrawerListItemProps) {
 
   const handleClick = () => {
     if (type) {
-      setDataType(type)
+      setDataType({
+        type: type,
+        title: text
+      })
     }
   }
 

@@ -8,6 +8,7 @@ import React, {
 import { getGames } from 'services/igdbGameService'
 import {
   DataTypeContextType,
+  DataTypeValue,
   DrawerContextType,
   Game,
   GamesContextType
@@ -28,7 +29,10 @@ export const DataTypeContext = createContext<DataTypeContextType | undefined>(
 export const DataTypeProvider: React.FC<{ children: ReactNode }> = ({
   children
 }) => {
-  const [dataType, setDataType] = useState('recentlyReleased') // Default value
+  const [dataType, setDataType] = useState<DataTypeValue>({
+    type: 'recentlyReleased',
+    title: 'Recently Released'
+  })
 
   return (
     <DataTypeContext.Provider value={{ dataType, setDataType }}>
@@ -49,7 +53,8 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children
 }) => {
   const [games, setGames] = useState<Game[]>([])
-  const dataType = useContext(DataTypeContext)?.dataType || 'recentlyReleased'
+  const dataTypeValue = useContext(DataTypeContext)?.dataType
+  const dataType = dataTypeValue?.type || 'recentlyReleased'
 
   const fetchAndCacheGames = async (type: string) => {
     try {

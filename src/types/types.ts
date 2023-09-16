@@ -84,7 +84,12 @@ export type GamesContextType = {
   fetchGames: (type: string) => Promise<void>
 }
 
-export type DataTypeContextType = {
-  dataType: string
-  setDataType: (dataType: string) => void
+export interface DataTypeContextType {
+  dataType: DataTypeValue
+  setDataType: React.Dispatch<React.SetStateAction<DataTypeValue>>
+}
+
+export interface DataTypeValue {
+  type: string
+  title: string
 }
