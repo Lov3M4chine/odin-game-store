@@ -7,7 +7,6 @@ import {
   logAPIErrorResponse,
   validateIGDBResponse
 } from './errorHandlers/validateFunctions.js'
-import fetchGenresByIds from './fetchGenres.js'
 
 export default async function fetchGames(req, res, next) {
   try {
@@ -32,25 +31,24 @@ export default async function fetchGames(req, res, next) {
     validateIGDBResponse(response)
 
     // Process and prepare initial data
-    const games = response.data.map((game) => processGameImages(game))
+    let games = response.data.map((game) => processGameImages(game))
 
-    // Extract unique genre by ID
-    const uniqueGenreIds = [...new Set(games.flatMap((game) => game.genres))]
+    // Filtering logic for "recently released"
+    if (dataType === 'recentlyReleased') {
+      const threeMonthsAgo = Date.now() - 90 * 24 * 60 * 60 * 1000 // milliseconds for 3 months
 
-    // Parallel fetches for additional data
-    const [genresData] = await Promise.all([
-      fetchGenresByIds(uniqueGenreIds, accessToken)
-    ])
+      games = games.filter((game) => {
+        if (game.release_dates && game.release_dates.length === 1) {
+          const releaseMillis = game.release_dates[0].date * 1000 // Convert to milliseconds
+          return releaseMillis > threeMonthsAgo && releaseMillis <= Date.now()
+        }
+        return false
+      })
+    }
 
-    // Enrich primary data with additional data
-    const enrichedGames = games.map((game) => ({
-      ...game,
-      genres: game.genres.map((id) => genresData[id] || id)
-    }))
-
-    //Set cache with enriched data
-    setCache(`gamesData-${dataType}`, enrichedGames)
-    res.json(enrichedGames)
+    // Set cache with data
+    setCache(`gamesData-${dataType}`, games)
+    res.json(games)
   } catch (error) {
     if (!(error instanceof IGDBError || error instanceof APIResponseError)) {
       logAPIErrorResponse(error)

@@ -20,15 +20,23 @@ export function replaceCoverSize(url, size = 't_cover_big') {
   return url.replace(/t_[a-z_]+/, size)
 }
 
+const threeMonthsAgoInSeconds = (() => {
+  const currentDate = new Date() // Gets the current date and time.
+  currentDate.setMonth(currentDate.getMonth() - 3) // Subtracts three months.
+  return Math.floor(currentDate.getTime() / 1000) // Gets the time in seconds since the Unix epoch.
+})()
+
+const todayInSeconds = Math.floor(Date.now() / 1000)
+
 export function determineDataFieldParameters(dataType) {
   switch (dataType) {
     // Top
     case 'recentlyReleased':
-      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2023; sort release_dates.y desc; limit 1;'
+      return `fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating, release_dates.date, release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.platform = (6,130,167,49,169,48) & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds} ;sort date desc; limit 500;`
     case 'top100':
-      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.y > 2022; sort release_dates.y asc; limit 10;'
+      return 'fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates; where platforms = (6,130,167,49,169,48) & cover.url != null; limit 10;'
     case 'comingSoon':
-      return `fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates.y; where platforms = (6,130,167,49,169,48) & cover.url != null; sort release_dates.y desc; limit 10;`
+      return `fields name,summary,cover.url,genres,platforms.name,platforms.platform_logo,screenshots.url,rating,release_dates; where platforms = (6,130,167,49,169,48) & cover.url != null; limit 10;`
     // Platforms
     case 'xbox':
       return 'fields name;'
