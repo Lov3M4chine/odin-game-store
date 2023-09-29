@@ -19,9 +19,16 @@ import {
 } from './styles'
 import { Logo } from 'components/Icons'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
+import searchGames from 'utils/searchGames'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
+  const [searchInput, setSearchInput] = React.useState('')
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value)
+    searchGames(e.target.value)
+  }
 
   return (
     <Box flexGrow={1}>
@@ -45,6 +52,8 @@ export function NavOverlay() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              value={searchInput}
+              onChange={handleSearchChange}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
