@@ -19,16 +19,42 @@ import {
 } from './styles'
 import { Logo } from 'components/Icons'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
-import searchGames from 'utils/searchGames'
+import { debounce } from 'utils/helpers'
+import { searchGames } from 'utils/searchGames'
+import { GamesContext } from 'contexts/GamesContext'
+import { DataTypeContext } from 'contexts/DataTypeContext'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
   const [searchInput, setSearchInput] = React.useState('')
+  const { setGames } = React.useContext(GamesContext) ?? {}
+  const { setDataType } = React.useContext(DataTypeContext) ?? {}
+
+  const searchGamesRef = React.useRef(
+    debounce((value) => {
+      if (setGames) {
+        searchGames(value, 'search', setGames)
+      } else {
+        console.error('setGames function is undefined')
+      }
+    }, 300)
+  )
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value)
-    searchGames(e.target.value)
+    const value = e.target.value
+    setSearchInput(value)
   }
+
+  React.useEffect(() => {
+    if (searchInput.length > 2) {
+      setDataType?.({
+        type: 'search',
+        title: 'Search Results',
+        query: searchInput
+      })
+      searchGamesRef.current(searchInput)
+    }
+  }, [searchInput, setGames, setDataType])
 
   return (
     <Box flexGrow={1}>

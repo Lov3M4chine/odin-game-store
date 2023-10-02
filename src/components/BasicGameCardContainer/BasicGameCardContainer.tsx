@@ -21,9 +21,16 @@ export function BasicGameCardContainer() {
       <StyledGameCardContainerWrapper>
         <Typography variant="h3">{dataType.title}</Typography>
         <StyledGameCardWrapper>
-          {games.map((game: Game) => (
-            <BasicGameCard key={game.id} game={game} />
-          ))}
+          {games.length > 0 ? (
+            games.map((game: Game) => (
+              <BasicGameCard key={game.id} game={game} />
+            ))
+          ) : (
+            <Typography variant="h5">
+              No games found with that name. Why not explore some of our top
+              picks instead?
+            </Typography>
+          )}
         </StyledGameCardWrapper>
       </StyledGameCardContainerWrapper>
     </>

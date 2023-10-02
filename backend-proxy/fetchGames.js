@@ -40,7 +40,8 @@ export default async function fetchGames(req, res, next) {
     }
 
     // Set cache with data
-    setCache(`gamesData-${dataType}`, games)
+    setCache(req, `gamesData-${dataType}`, games)
+
     res.json(games)
   } catch (error) {
     if (!(error instanceof IGDBError || error instanceof APIResponseError)) {

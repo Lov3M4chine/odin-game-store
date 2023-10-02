@@ -82,6 +82,8 @@ export type GamesContextType = {
   games: Game[]
   setGames: React.Dispatch<React.SetStateAction<Game[]>>
   fetchGames: (type: string) => Promise<void>
+  searchTerm?: string
+  setSearchTerm?: (term: string) => void
 }
 
 export interface DataTypeContextType {
@@ -92,6 +94,7 @@ export interface DataTypeContextType {
 export interface DataTypeValue {
   type: string
   title: string
+  query?: string
 }
 
 export interface DynamicFontSizeTypographyProps {

@@ -34,8 +34,16 @@ const threeMonthsFromNowInSeconds = (() => {
 
 const todayInSeconds = Math.floor(Date.now() / 1000)
 
-export function determineDataFieldParameters(dataType) {
+export function determineDataFieldParameters(dataType, query) {
+  console.log('dataType: ', dataType, 'query: ', query)
+
   switch (dataType) {
+    // Search
+    case 'search':
+      if (!query) {
+        throw new Error('Query is required for search dataType')
+      }
+      return `search "${query}"; fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where cover.url != null; limit 100;`
     // Top
     case 'recentlyReleased':
       return `fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,release_dates.date; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds}; sort release_dates.date desc; limit 500;`
@@ -66,14 +74,16 @@ export function determineDataFieldParameters(dataType) {
     case 'shooter':
       return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Shooter"; sort aggregated_rating desc; limit 100;'
     default:
-      throw {
-        name: 'UnsupportedDataTypeError',
-        message: `Unsupported dataType '${dataType}' provided...`
-      }
+      throw new Error(`Unsupported dataType '${dataType}' provided...`)
   }
 }
 
 export function setDataFieldParameters(req, res, next) {
-  req.dataFieldParameters = determineDataFieldParameters(req.query.dataType)
+  console.log(`Setting query parameter: ${req.query.query}`)
+
+  req.dataFieldParameters = determineDataFieldParameters(
+    req.query.dataType,
+    req.query.query
+  )
   next()
 }

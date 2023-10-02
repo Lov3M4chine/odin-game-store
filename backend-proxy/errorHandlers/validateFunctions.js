@@ -6,7 +6,7 @@ import {
 } from './errorClasses.js'
 
 export function validateIGDBResponse(response) {
-  if (!Array.isArray(response.data) || response.data.length === 0) {
+  if (!Array.isArray(response.data)) {
     throw new IGDBError('Unexpected response from IGDB.')
   }
 }

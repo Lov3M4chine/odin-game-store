@@ -8,6 +8,7 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children
 }) => {
   const [games, setGames] = useState<Game[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const dataTypeValue = useContext(DataTypeContext)?.dataType
   const dataType = dataTypeValue?.type || 'recentlyReleased'
 
@@ -21,6 +22,8 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
       )
     } catch (error) {
       console.error('Failed fetching game data', error)
+    } finally {
+      setIsLoading(false) // end the loading
     }
   }
 
@@ -37,7 +40,11 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <GamesContext.Provider
-      value={{ games, setGames, fetchGames: fetchAndCacheGames }}
+      value={{
+        games,
+        setGames,
+        fetchGames: fetchAndCacheGames
+      }}
     >
       {children}
     </GamesContext.Provider>
