@@ -39,6 +39,19 @@ export default async function fetchGames(req, res, next) {
       })
     }
 
+    if (dataType === 'search') {
+      const seenNames = new Set()
+
+      games = games.filter((game) => {
+        if (seenNames.has(game.name)) {
+          return false // Skip this game
+        } else {
+          seenNames.add(game.name)
+          return true // Keep this game
+        }
+      })
+    }
+
     // Set cache with data
     setCache(req, `gamesData-${dataType}`, games)
 
