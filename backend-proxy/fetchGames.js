@@ -10,7 +10,6 @@ import {
 
 export default async function fetchGames(req, res, next) {
   try {
-    console.log('Fetching from API...')
     const accessToken = await getIGDBAccessToken()
     const data = req.dataFieldParameters
     const dataType = req.query.dataType
@@ -62,5 +61,4 @@ export default async function fetchGames(req, res, next) {
     }
     next(error)
   }
-  console.log('....fetching complete')
 }

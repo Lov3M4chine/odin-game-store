@@ -7,7 +7,7 @@ import {
   StyledCardMedia,
   StyledCenterText
 } from './styles'
-import { getPlatformIcon, groupPlatforms } from 'utils/helpers'
+import { getPlatformIcon, groupPlatforms } from 'utils'
 import { DynamicFontSizeTypography } from 'utils/DynamicFontSizeTypography'
 
 export const BasicGameDisplaySection: React.FC<GameDisplaySectionProps> = ({

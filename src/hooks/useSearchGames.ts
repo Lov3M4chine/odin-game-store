@@ -1,7 +1,7 @@
 import { DataTypeContext } from 'contexts/DataTypeContext'
 import { GamesContext } from 'contexts/GamesContext'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { debounce } from 'utils/helpers'
+import { debounce } from 'utils'
 import { searchGames } from 'utils/searchGames'
 
 export const useSearchGames = () => {

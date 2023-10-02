@@ -3,6 +3,7 @@ import { getGames } from 'services/igdbGameService'
 import { Game } from 'types'
 import { GamesContext } from './GamesContext'
 import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
+import { fetchGamesData, getGameCache, setGameCache } from 'utils'
 
 export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children
@@ -14,28 +15,19 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
 
   const fetchAndCacheGames = async (type: string) => {
     setIsLoading(true)
-    console.log('Is loading set to true')
     try {
-      const fetchedGames = await getGames(type)
+      const fetchedGames = await fetchGamesData(type)
       setGames(fetchedGames)
-      sessionStorage.setItem(
-        `gamesData-${type}`,
-        JSON.stringify({ games: fetchedGames })
-      )
-    } catch (error) {
-      console.error('Failed fetching game data', error)
+      setGameCache(type, fetchedGames)
     } finally {
       setIsLoading(false)
-      console.log('Is loading set to false')
     }
   }
 
   useEffect(() => {
-    const cachedDataString = sessionStorage.getItem(`gamesData-${dataType}`)
-    const cachedData = cachedDataString ? JSON.parse(cachedDataString) : null
-
-    if (cachedData && cachedData.games) {
-      setGames(cachedData.games)
+    const cachedGames = getGameCache(dataType)
+    if (cachedGames) {
+      setGames(cachedGames)
     } else {
       fetchAndCacheGames(dataType)
     }

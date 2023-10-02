@@ -8,10 +8,6 @@ export const searchGames = async (
 ) => {
   if (!query.trim()) return
 
-  console.log(
-    `searchGames is initializing getGames. dataType is ${dataType} query is ${query}`
-  )
-
   const searchedGames = await getGames(dataType, query)
 
   setGames(searchedGames)

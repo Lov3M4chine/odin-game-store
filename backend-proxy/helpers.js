@@ -35,8 +35,6 @@ const threeMonthsFromNowInSeconds = (() => {
 const todayInSeconds = Math.floor(Date.now() / 1000)
 
 export function determineDataFieldParameters(dataType, query) {
-  console.log('dataType: ', dataType, 'query: ', query)
-
   switch (dataType) {
     // Search
     case 'search':
@@ -79,8 +77,6 @@ export function determineDataFieldParameters(dataType, query) {
 }
 
 export function setDataFieldParameters(req, res, next) {
-  console.log(`Setting query parameter: ${req.query.query}`)
-
   req.dataFieldParameters = determineDataFieldParameters(
     req.query.dataType,
     req.query.query

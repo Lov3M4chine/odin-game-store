@@ -11,9 +11,6 @@ export const getGames = async (
   }
 
   try {
-    console.log(
-      `getGames is initializing fetch. dataType is ${dataType} Query is ${query}`
-    )
     const response = await fetch(
       `http://localhost:3001/fetchGames?dataType=${dataType}${
         query ? `&query=${encodeURIComponent(query)}` : ''
@@ -23,7 +20,6 @@ export const getGames = async (
     await handleBackendErrors(response)
 
     const games: Game[] = await response.json()
-    console.log(dataType, ':', games)
 
     return games
   } catch (error) {

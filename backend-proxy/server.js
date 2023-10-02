@@ -9,8 +9,6 @@ import { setDataFieldParameters } from './helpers.js'
 const app = express()
 const PORT = 3001
 
-console.log('Server initializing...')
-
 app.use(cors())
 
 // Middleware to check if data exists in the cache
@@ -30,6 +28,4 @@ app.get('/fetchGames', asyncHandler(fetchGames))
 // Global error handler
 app.use(handleErrors)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
-})
+app.listen(PORT, () => {})
