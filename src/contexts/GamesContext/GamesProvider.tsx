@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from 'react'
 import { GamesContext } from './GamesContext'
 import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
-import { useFetchAndCacheGames } from 'hooks/useFetchAndCacheGames'
+import { useFetchAndCacheGames } from 'hooks'
 
 export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children

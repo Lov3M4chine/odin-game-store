@@ -20,6 +20,7 @@ export type Game = {
     id: number
     url: string
   }[]
+  price?: number
 }
 
 export type DrawerStates = {
@@ -104,4 +105,22 @@ export interface DynamicFontSizeTypographyProps {
 
 export type PlatformIconMapping = {
   [key: string]: React.ReactElement
+}
+
+export interface CartItem {
+  id: string
+  name: string
+  price: number
+  quantity: number
+}
+
+export interface CartContextType {
+  cart: CartItem[]
+  addToCart: (item: CartItem) => void
+  removeFromCart: (itemId: string) => void
+  clearCart: () => void
+}
+
+export type CartProviderProps = {
+  children?: React.ReactNode
 }

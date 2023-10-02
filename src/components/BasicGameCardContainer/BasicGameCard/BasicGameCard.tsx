@@ -7,7 +7,7 @@ export const BasicGameCard: React.FC<GameCardProps> = ({ game }) => {
   return (
     <StyledCard>
       <BasicGameDisplaySection game={game} />
-      <BasicGameCardActionSection />
+      <BasicGameCardActionSection game={game} />
     </StyledCard>
   )
 }

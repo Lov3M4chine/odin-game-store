@@ -19,7 +19,7 @@ import {
 } from './styles'
 import { Logo } from 'components/Icons'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
-import { useSearchGames } from 'hooks/useSearchGames'
+import { useSearchGames } from 'hooks'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()

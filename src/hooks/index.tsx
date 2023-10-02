@@ -1,3 +1,6 @@
 export { useDataType } from './useDataType'
 export { useDrawer } from './useDrawer'
 export { useGames } from './useGames'
+export { useCart } from './useCart'
+export { useSearchGames } from './useSearchGames'
+export { useFetchAndCacheGames } from './useFetchAndCacheGames'

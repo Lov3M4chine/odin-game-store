@@ -5,6 +5,7 @@ import { GamesProvider } from 'contexts/GamesContext/GamesProvider'
 import theme from 'theme'
 import { NavOverlay } from './NavOverlay'
 import { BasicGameCardContainer } from './BasicGameCardContainer'
+import { CartProvider } from 'contexts/CartContext'
 
 function App() {
   return (
@@ -12,8 +13,10 @@ function App() {
       <GamesProvider>
         <ThemeProvider theme={theme}>
           <DrawerProvider>
-            <NavOverlay />
-            <BasicGameCardContainer />
+            <CartProvider>
+              <NavOverlay />
+              <BasicGameCardContainer />
+            </CartProvider>
           </DrawerProvider>
         </ThemeProvider>
       </GamesProvider>
