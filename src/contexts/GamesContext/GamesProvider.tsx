@@ -1,47 +1,18 @@
-import { ReactNode, useContext, useEffect, useState } from 'react'
-import { getGames } from 'services/igdbGameService'
-import { Game } from 'types'
+import { ReactNode, useContext } from 'react'
 import { GamesContext } from './GamesContext'
 import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
-import { fetchGamesData, getGameCache, setGameCache } from 'utils'
+import { useFetchAndCacheGames } from 'hooks/useFetchAndCacheGames'
 
 export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   children
 }) => {
-  const [games, setGames] = useState<Game[]>([])
-  const [isLoading, setIsLoading] = useState(false)
   const dataTypeValue = useContext(DataTypeContext)?.dataType
   const dataType = dataTypeValue?.type || 'recentlyReleased'
-
-  const fetchAndCacheGames = async (type: string) => {
-    setIsLoading(true)
-    try {
-      const fetchedGames = await fetchGamesData(type)
-      setGames(fetchedGames)
-      setGameCache(type, fetchedGames)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    const cachedGames = getGameCache(dataType)
-    if (cachedGames) {
-      setGames(cachedGames)
-    } else {
-      fetchAndCacheGames(dataType)
-    }
-  }, [dataType])
+  const { games, isLoading, fetchGames, setGames } =
+    useFetchAndCacheGames(dataType)
 
   return (
-    <GamesContext.Provider
-      value={{
-        games,
-        setGames,
-        fetchGames: fetchAndCacheGames,
-        isLoading
-      }}
-    >
+    <GamesContext.Provider value={{ games, fetchGames, setGames, isLoading }}>
       {children}
     </GamesContext.Provider>
   )
