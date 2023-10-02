@@ -84,6 +84,7 @@ export type GamesContextType = {
   fetchGames: (type: string) => Promise<void>
   searchTerm?: string
   setSearchTerm?: (term: string) => void
+  isLoading: boolean
 }
 
 export interface DataTypeContextType {

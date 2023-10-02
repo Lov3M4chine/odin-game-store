@@ -13,6 +13,8 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
   const dataType = dataTypeValue?.type || 'recentlyReleased'
 
   const fetchAndCacheGames = async (type: string) => {
+    setIsLoading(true)
+    console.log('Is loading set to true')
     try {
       const fetchedGames = await getGames(type)
       setGames(fetchedGames)
@@ -23,7 +25,8 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
     } catch (error) {
       console.error('Failed fetching game data', error)
     } finally {
-      setIsLoading(false) // end the loading
+      setIsLoading(false)
+      console.log('Is loading set to false')
     }
   }
 
@@ -43,7 +46,8 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         games,
         setGames,
-        fetchGames: fetchAndCacheGames
+        fetchGames: fetchAndCacheGames,
+        isLoading
       }}
     >
       {children}

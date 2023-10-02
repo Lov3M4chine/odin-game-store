@@ -7,7 +7,7 @@ import { Game } from 'types'
 import { BasicGameCard } from './BasicGameCard/BasicGameCard'
 
 export function BasicGameCardContainer() {
-  const { games } = useGames()
+  const { games, isLoading } = useGames()
   const context = useContext(DataTypeContext)
 
   if (!context) {
@@ -17,22 +17,22 @@ export function BasicGameCardContainer() {
   const { dataType } = context
 
   return (
-    <>
-      <StyledGameCardContainerWrapper>
-        <Typography variant="h3">{dataType.title}</Typography>
+    <StyledGameCardContainerWrapper>
+      <Typography variant="h3">{dataType.title}</Typography>
+      {isLoading ? (
+        <Typography variant="h5">Loading...</Typography>
+      ) : !games || !games.length ? (
+        <Typography variant="h5">
+          No games found with that name. Why not explore some of our top picks
+          instead?
+        </Typography>
+      ) : (
         <StyledGameCardWrapper>
-          {games.length > 0 ? (
-            games.map((game: Game) => (
-              <BasicGameCard key={game.id} game={game} />
-            ))
-          ) : (
-            <Typography variant="h5">
-              No games found with that name. Why not explore some of our top
-              picks instead?
-            </Typography>
-          )}
+          {games.map((game: Game) => (
+            <BasicGameCard key={game.id} game={game} />
+          ))}
         </StyledGameCardWrapper>
-      </StyledGameCardContainerWrapper>
-    </>
+      )}
+    </StyledGameCardContainerWrapper>
   )
 }
