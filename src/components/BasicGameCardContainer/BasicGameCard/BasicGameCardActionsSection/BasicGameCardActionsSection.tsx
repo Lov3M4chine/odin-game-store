@@ -1,41 +1,30 @@
-import React, { useContext } from 'react'
-import { StyledButton, StyledCardActions, StyledTypography } from './styles'
-import { CartItem, Game } from 'types'
-import { CartContext } from 'contexts/CartContext'
+import { StyledCardActions, StyledTypography } from './styles'
+import { Game } from 'types'
 import { Link } from 'react-router-dom'
+import { useCart } from 'hooks'
+import { Button } from '@mui/material'
 
 export const BasicGameCardActionSection: React.FC<{ game: Game }> = ({
   game
 }) => {
-  const { addToCart } = useContext(CartContext)
-  const displayedPrice = game.price ?? 39.99
-
-  const handleAddToCart = () => {
-    const cartItem: CartItem = {
-      ...game,
-      id: game.id.toString(), // Convert id to string
-      quantity: 1,
-      price: game.price || 39.99
-    }
-    addToCart(cartItem)
-  }
+  const { addGameToCart } = useCart()
 
   return (
     <StyledCardActions>
       <Link to={`/game/${game.id}`}>
-        <StyledButton size="small" color="primary" variant="contained">
+        <Button size="small" color="primary" variant="contained">
           Details
-        </StyledButton>
+        </Button>
       </Link>
-      <StyledTypography>${displayedPrice.toFixed(2)}</StyledTypography>
-      <StyledButton
+      <StyledTypography>${(game.price ?? 39.99).toFixed(2)}</StyledTypography>
+      <Button
         size="small"
         color="secondary"
         variant="contained"
-        onClick={handleAddToCart}
+        onClick={() => addGameToCart(game)}
       >
         Add to Cart
-      </StyledButton>
+      </Button>
     </StyledCardActions>
   )
 }

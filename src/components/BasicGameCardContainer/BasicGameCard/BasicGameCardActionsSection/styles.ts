@@ -4,14 +4,17 @@ import { Button, CardActions, Typography } from '@mui/material'
 export const StyledCardActions = styled(CardActions)`
   display: flex;
   justify-content: space-between;
-  padding-top: 0.5rem; // Convert 0.5 from the theme to pixels or use your theme's equivalent
+  padding-top: 0.5rem;
 `
 
 export const StyledTypography = styled(Typography)`
   font-size: 1rem;
-  padding: 0.5rem; // Convert 1 from the theme to pixels or use your theme's equivalent
+  padding: 0.5rem;
 `
 
-export const StyledButton = styled(Button)`
-  // Add any specific styles for the button if needed
+export const GameDetailsAddToCartStyledButton = styled(Button)`
+  width: 100%;
+  height: 3rem;
+  margin: 0 auto;
+  display: block;
 `

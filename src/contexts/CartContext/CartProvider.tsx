@@ -4,7 +4,8 @@ import { CartItem, CartProviderProps } from 'types'
 import { addToCart, clearCart, removeFromCart } from 'utils/shoppingCartHelpers'
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cart, setCart] = useState<CartItem[]>([])
+  const initialCart = JSON.parse(localStorage.getItem('cart') || '[]')
+  const [cart, setCart] = useState(initialCart)
 
   const enhancedAddToCart = (item: CartItem) => addToCart(cart, setCart, item)
   const enhancedRemoveFromCart = (itemId: string) =>

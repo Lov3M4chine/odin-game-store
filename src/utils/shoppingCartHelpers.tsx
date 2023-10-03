@@ -7,17 +7,22 @@ export const addToCart = (
 ) => {
   const itemExists = cart.find((cartItem) => cartItem.id === item.id)
 
-  if (itemExists) {
-    setCart(
-      cart.map((cartItem) =>
+  setCart((prevCart) => {
+    let updatedCart
+
+    if (itemExists) {
+      updatedCart = prevCart.map((cartItem) =>
         cartItem.id === item.id
           ? { ...cartItem, quantity: cartItem.quantity + 1 }
           : cartItem
       )
-    )
-  } else {
-    setCart([...cart, { ...item, quantity: 1 }])
-  }
+    } else {
+      updatedCart = [...prevCart, { ...item, quantity: 1 }]
+    }
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    return updatedCart
+  })
 }
 
 export const removeFromCart = (
@@ -25,11 +30,16 @@ export const removeFromCart = (
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>,
   itemId: string
 ) => {
-  setCart(cart.filter((item) => item.id !== itemId))
+  setCart((prevCart) => {
+    const updatedCart = prevCart.filter((item) => item.id !== itemId)
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    return updatedCart
+  })
 }
 
 export const clearCart = (
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>
 ) => {
   setCart([])
+  localStorage.removeItem('cart')
 }

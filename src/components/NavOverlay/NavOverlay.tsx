@@ -37,7 +37,7 @@ export function NavOverlay() {
 
   return (
     <Box flexGrow={1}>
-      <StyledAppBar>
+      <StyledAppBar style={{ backgroundColor: '#1E2123', opacity: 1 }}>
         <Toolbar>
           <StyledIconButton
             size="large"

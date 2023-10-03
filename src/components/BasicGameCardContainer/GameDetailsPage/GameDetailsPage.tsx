@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom'
 import { StyledGameDetailsPageWrapper } from '../styles'
 import { Typography } from '@mui/material'
 import Carousel from './Carousel'
+import { useCart } from 'hooks'
+import { GameDetailsAddToCartStyledButton } from '../BasicGameCard/BasicGameCardActionsSection/styles'
 
 export const GameDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
+  const { addGameToCart } = useCart()
 
   // Access the context
   const context = useContext(GamesContext)
@@ -29,10 +32,9 @@ export const GameDetailsPage: React.FC = () => {
     )
   }
 
-  const screenshots = game.screenshots.map(
-    (screenshot) => 'https:' + screenshot.url
-  )
-
+  const screenshots = game.screenshots
+    ? game.screenshots.map((screenshot) => 'https:' + screenshot.url)
+    : 'N/A'
   const platforms = game.platforms
     ? game.platforms.map((platform) => platform.name).join(', ')
     : 'N/A'
@@ -52,9 +54,30 @@ export const GameDetailsPage: React.FC = () => {
   return (
     <StyledGameDetailsPageWrapper>
       <Typography variant="h3">{game.name}</Typography>
-      <Carousel images={screenshots} />
-      <Typography variant="h5">{game.summary}</Typography>
-      <Typography variant="h5">{game.storyline}</Typography>
+      {screenshots !== 'N/A' && <Carousel images={screenshots} />}
+      <GameDetailsAddToCartStyledButton
+        size="large"
+        color="secondary"
+        variant="contained"
+        onClick={() => addGameToCart(game)}
+      >
+        <span>Add to Cart</span>
+        <span
+          style={{
+            marginLeft: '2rem',
+            fontSize: '.9rem',
+            color: 'black',
+            backgroundColor: 'green',
+            borderRadius: '5px',
+            padding: '0.4rem'
+          }}
+        >
+          ${game.price ?? 39.99}
+        </span>
+      </GameDetailsAddToCartStyledButton>
+
+      {game.summary && <Typography variant="h5">{game.summary}</Typography>}
+      {game.storyline && <Typography variant="h5">{game.storyline}</Typography>}
       {platforms !== 'N/A' && (
         <Typography variant="h5">Platforms: {platforms}</Typography>
       )}
