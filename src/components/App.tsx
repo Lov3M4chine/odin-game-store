@@ -6,21 +6,28 @@ import theme from 'theme'
 import { NavOverlay } from './NavOverlay'
 import { BasicGameCardContainer } from './BasicGameCardContainer'
 import { CartProvider } from 'contexts/CartContext'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { GameDetailsPage } from './BasicGameCardContainer/GameDetailsPage'
 
 function App() {
   return (
-    <DataTypeProvider>
-      <GamesProvider>
-        <ThemeProvider theme={theme}>
-          <DrawerProvider>
-            <CartProvider>
-              <NavOverlay />
-              <BasicGameCardContainer />
-            </CartProvider>
-          </DrawerProvider>
-        </ThemeProvider>
-      </GamesProvider>
-    </DataTypeProvider>
+    <BrowserRouter>
+      <DataTypeProvider>
+        <GamesProvider>
+          <ThemeProvider theme={theme}>
+            <DrawerProvider>
+              <CartProvider>
+                <NavOverlay />
+                <Routes>
+                  <Route path="/game/:id" element={<GameDetailsPage />} />
+                  <Route path="/" element={<BasicGameCardContainer />} />
+                </Routes>
+              </CartProvider>
+            </DrawerProvider>
+          </ThemeProvider>
+        </GamesProvider>
+      </DataTypeProvider>
+    </BrowserRouter>
   )
 }
 

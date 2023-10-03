@@ -33,6 +33,7 @@ const threeMonthsFromNowInSeconds = (() => {
 })()
 
 const todayInSeconds = Math.floor(Date.now() / 1000)
+const COMMON_FIELDS = `fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating,release_dates.date,release_dates.human,game_engines.name,game_modes.name,involved_companies.company.name,storyline`
 
 export function determineDataFieldParameters(dataType, query) {
   switch (dataType) {
@@ -41,36 +42,36 @@ export function determineDataFieldParameters(dataType, query) {
       if (!query) {
         throw new Error('Query is required for search dataType')
       }
-      return `search "${query}"; fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where cover.url != null; limit 100;`
+      return `search "${query}"; ${COMMON_FIELDS}; where cover.url != null; limit 100;`
     // Top
     case 'recentlyReleased':
-      return `fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,release_dates.date; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds}; sort release_dates.date desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds}; sort release_dates.date desc; limit 500;`
     case 'top100':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     case 'comingSoon':
-      return `fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,release_dates.date; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${todayInSeconds} & release_dates.date < ${threeMonthsFromNowInSeconds}; sort release_dates.date asc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${todayInSeconds} & release_dates.date < ${threeMonthsFromNowInSeconds}; sort release_dates.date asc; limit 500;`
     // Platforms
     case 'xbox':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (169) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;'
+      return `${COMMON_FIELDS}; where platforms = (169) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
     case 'playstation':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (167) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;'
+      return `${COMMON_FIELDS}; where platforms = (167) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
     case 'pc':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;'
+      return `${COMMON_FIELDS}; where platforms = (6) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
     case 'switch':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (130) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;'
+      return `${COMMON_FIELDS}; where platforms = (130) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
     // Genre
     case 'adventure':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Adventure"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Adventure"; sort aggregated_rating desc; limit 100;`
     case 'indie':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Indie"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Indie"; sort aggregated_rating desc; limit 100;`
     case 'RPG':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Role-playing (RPG)"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Role-playing (RPG)"; sort aggregated_rating desc; limit 100;`
     case 'strategy':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Strategy"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Strategy"; sort aggregated_rating desc; limit 100;`
     case 'puzzle':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Puzzle"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Puzzle"; sort aggregated_rating desc; limit 100;`
     case 'shooter':
-      return 'fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Shooter"; sort aggregated_rating desc; limit 100;'
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Shooter"; sort aggregated_rating desc; limit 100;`
     default:
       throw new Error(`Unsupported dataType '${dataType}' provided...`)
   }

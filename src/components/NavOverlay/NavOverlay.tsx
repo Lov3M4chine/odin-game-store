@@ -31,6 +31,10 @@ export function NavOverlay() {
     setSearchInput(e.target.value)
   }
 
+  const handleRefresh = () => {
+    window.location.href = '/'
+  }
+
   return (
     <Box flexGrow={1}>
       <StyledAppBar>
@@ -44,7 +48,12 @@ export function NavOverlay() {
           >
             <MenuIcon />
           </StyledIconButton>
-          <StyledTypography variant="h6" noWrap>
+          <StyledTypography
+            variant="h6"
+            noWrap
+            onClick={handleRefresh}
+            style={{ cursor: 'pointer' }}
+          >
             Galactic Games
           </StyledTypography>
           <Logo />

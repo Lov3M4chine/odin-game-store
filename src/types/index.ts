@@ -4,6 +4,7 @@ export type Game = {
   name: string
   id: number
   summary: string
+  storyline: string
   cover: {
     id: number
     url: string
@@ -21,6 +22,21 @@ export type Game = {
     url: string
   }[]
   price?: number
+  aggregated_rating?: number
+  release_dates: {
+    human: string
+  }[]
+  game_engines?: {
+    name: string
+  }[]
+  game_modes?: {
+    name: string
+  }[]
+  involved_companies?: {
+    company: {
+      name: string
+    }
+  }[]
 }
 
 export type DrawerStates = {

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { StyledButton, StyledCardActions, StyledTypography } from './styles'
 import { CartItem, Game } from 'types'
 import { CartContext } from 'contexts/CartContext'
+import { Link } from 'react-router-dom'
 
 export const BasicGameCardActionSection: React.FC<{ game: Game }> = ({
   game
@@ -21,9 +22,11 @@ export const BasicGameCardActionSection: React.FC<{ game: Game }> = ({
 
   return (
     <StyledCardActions>
-      <StyledButton size="small" color="primary" variant="contained">
-        Details
-      </StyledButton>
+      <Link to={`/game/${game.id}`}>
+        <StyledButton size="small" color="primary" variant="contained">
+          Details
+        </StyledButton>
+      </Link>
       <StyledTypography>${displayedPrice.toFixed(2)}</StyledTypography>
       <StyledButton
         size="small"
