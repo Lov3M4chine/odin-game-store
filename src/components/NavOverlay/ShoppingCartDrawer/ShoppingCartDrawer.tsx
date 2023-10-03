@@ -5,7 +5,9 @@ import {
   Typography,
   Button,
   ListItem,
-  ListItemText
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { ToggleableComponentProps } from 'types'
@@ -16,12 +18,8 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
   open,
   onClose
 }) => {
-  const cartContext = useContext(CartContext)
-  if (!cartContext) {
-    throw new Error('useCart must be used within a CartProvider')
-  }
-
   const { cart, clearCart } = useContext(CartContext)
+  const { removeFromCart } = useContext(CartContext)
 
   const list = () => (
     <Box role="presentation">
@@ -48,25 +46,37 @@ export const ShoppingCartDrawer: React.FC<ToggleableComponentProps> = ({
             </Button>
           </Box>
         </HeaderDivider>
-        {/* Dynamic cart items */}
         {cart.map((item) => (
           <ListItem key={item.id}>
             <ListItemText
               primary={item.name}
-              secondary={`Quantity: ${item.quantity}`}
+              secondary={`Quantity: ${
+                item.quantity
+              } | Price: $${item.price.toFixed(2)}`}
             />
-            {/* Add button or icon to remove the item if desired */}
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => removeFromCart(item.id)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
-        {/* You can further refine the footer to reflect total cost, etc. */}
         <FooterDivider>
           <Typography variant="h5" color="primary" display="inline">
             Total:
           </Typography>
-          <Typography variant="h5" display="inline">
-            {/* Add logic to calculate total */} $
-            {cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
-          </Typography>
+          <Box ml={1} component="span">
+            <Typography variant="h5" display="inline">
+              $
+              {cart
+                .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                .toFixed(2)}
+            </Typography>
+          </Box>
         </FooterDivider>
       </List>
     </Box>

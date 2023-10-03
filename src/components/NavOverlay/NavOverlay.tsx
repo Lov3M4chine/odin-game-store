@@ -20,10 +20,12 @@ import {
 import { Logo } from 'components/Icons'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
 import { useSearchGames } from 'hooks'
+import { CartContext } from 'contexts/CartContext'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawer()
   const { searchInput, setSearchInput } = useSearchGames()
+  const { cart } = React.useContext(CartContext)
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value)
@@ -65,7 +67,7 @@ export function NavOverlay() {
               color="inherit"
               onClick={() => toggleDrawer('cartDrawerOpen')}
             >
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={cart.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
