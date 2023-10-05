@@ -7,18 +7,50 @@ import { Typography } from '@mui/material'
 import { NavDrawerToggleProps } from 'types'
 import { genreMenuItems, platformMenuItems, topMenuItems } from './MenuItems'
 import { CustomListItem } from './CustomListItem'
-import { StyledDivider, StyledDrawer } from './styles'
+import {
+  MobileSearch,
+  MobileSearchIconWrapper,
+  MobileStyledInputBase,
+  StyledDivider,
+  StyledDrawer
+} from './styles'
+import SearchIcon from '@mui/icons-material/Search'
+import { useSearchGames } from 'hooks'
 
 export const NavDrawer: React.FC<NavDrawerToggleProps> = ({
   open,
   onClose
 }) => {
+  const { searchInput, setSearchInput } = useSearchGames()
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value)
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onClose() // close the drawer
+    }
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <StyledDrawer open={open} onClose={onClose} variant="persistent">
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
+          <MobileSearch>
+            <MobileSearchIconWrapper>
+              <SearchIcon />
+            </MobileSearchIconWrapper>
+            <MobileStyledInputBase
+              value={searchInput}
+              onChange={handleSearchChange}
+              onKeyPress={handleKeyPress}
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </MobileSearch>
           <StyledDivider role="presentation">
             <Typography variant="h5" color="primary">
               Top

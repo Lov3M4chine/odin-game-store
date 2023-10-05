@@ -8,6 +8,8 @@ import { BasicGameCardContainer } from './BasicGameCardContainer'
 import { CartProvider } from 'contexts/CartContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GameDetailsPage } from './BasicGameCardContainer/GameDetailsPage'
+// src/index.js or another entry point
+import 'fonts.css'
 
 function App() {
   return (

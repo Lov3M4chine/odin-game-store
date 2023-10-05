@@ -12,7 +12,7 @@ export const Search = styled('div')(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
+  width: '40%', // Reduce to 70% for mobile
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto'
@@ -45,24 +45,40 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const StyledAppBar = styled(AppBar)`
   position: fixed;
+  width: 100%; // Ensure it takes full width
   z-index: ${({ theme }) => theme.zIndex.drawer + 1};
 `
 
 export const StyledIconButton = styled(IconButton)`
-  margin-right: 2rem;
+  margin-right: 0rem; // Reduce margin for mobile
+
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    margin-right: 2rem;
+  }
 `
 
 export const StyledTypography = styled(Typography)`
-  display: none;
+  display: block;
+  padding-left: 0rem; // Reduce padding for mobile
+
   ${({ theme }) => theme.breakpoints.up('sm')} {
-    display: block;
+    padding-left: 10rem;
   }
-  padding-left: 10rem;
 `
 
-export const StyledBox = styled(Box)`
-  display: none;
-  ${({ theme }) => theme.breakpoints.up('md')} {
-    display: flex;
+export const ResponsiveStyledBox = styled(Box)`
+  display: flex;
+`
+
+export const SiteNameAndLogoContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+`
+
+export const DesktopSearch = styled(Search)`
+  @media (max-width: 899px) {
+    display: none;
   }
 `

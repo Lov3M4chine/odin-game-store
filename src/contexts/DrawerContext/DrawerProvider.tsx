@@ -3,8 +3,10 @@ import { DrawerProviderProps, DrawerStates, DrawerToggleCallback } from 'types'
 import { DrawerContext } from './DrawerContext'
 
 export const DrawerProvider: React.FC<DrawerProviderProps> = ({ children }) => {
+  const isMobileDevice = () => window.innerWidth <= 650
+
   const [drawerStates, setDrawerStates] = React.useState<DrawerStates>({
-    navDrawerOpen: true,
+    navDrawerOpen: !isMobileDevice(),
     cartDrawerOpen: false
   })
 

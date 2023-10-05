@@ -1,35 +1,65 @@
-import { Typography } from '@mui/material'
+import { Typography, useMediaQuery } from '@mui/material'
 import { useGames } from 'hooks/useGames'
 import { useContext, useEffect, useState } from 'react'
 import { DataTypeContext } from 'contexts/DataTypeContext/DataTypeContext'
-import { StyledGameCardContainerWrapper, StyledGameCardWrapper } from './styles'
+import {
+  DataTypeTitleContainer,
+  DataTypeTypography,
+  StyledGameCardContainerWrapper,
+  StyledGameCardWrapper
+} from './styles'
 import { Game } from 'types'
 import { BasicGameCard } from './BasicGameCard/BasicGameCard'
 import loadingBar from 'assets/loading-bar.gif'
 import marioGIF from 'assets/mario.gif'
 import loadingText from 'assets/loading-text.gif'
+import { DrawerContext } from 'contexts/DrawerContext'
+import { Theme } from '@mui/system'
 
 export function BasicGameCardContainer() {
   const { games, isLoading } = useGames()
-  const context = useContext(DataTypeContext)
+  const dataTypeContext = useContext(DataTypeContext)
+  const isMobileScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('sm')
+  )
 
-  if (!context) {
+  if (!dataTypeContext) {
     throw new Error('DataTypeContext must be used within a DataTypeProvider')
   }
 
-  const { dataType } = context
+  const drawerContext = useContext(DrawerContext)
+
+  if (!drawerContext) {
+    throw new Error(
+      'BasicGameCardContainer must be used within a DrawerProvider'
+    )
+  }
+
+  const { drawerStates } = drawerContext
+  // or however you maintain the drawer state
+  const isDrawerOpen = drawerStates.navDrawerOpen // assuming 'navDrawerOpen' is the key for the state
+
+  const { dataType } = dataTypeContext
 
   // States for Mario's position
   const [marioPosition, setMarioPosition] = useState<{
     top: string
     left: string
-  }>({ top: '0vh', left: '0vw' })
+  }>({ top: '40vh', left: '10vw' })
 
   const generateRandomPosition = () => {
-    const topBoundary = 20 // 20% from the top
-    const bottomBoundary = 80 // 80% from the top (so, 20% from the bottom)
-    const leftBoundary = 10 // 10% from the left
-    const rightBoundary = 90 // 90% from the left (so, 10% from the right)
+    let topBoundary, bottomBoundary, leftBoundary, rightBoundary
+    if (isMobileScreen) {
+      topBoundary = 40 // 20% from the top
+      bottomBoundary = 90 // 80% from the top (so, 20% from the bottom)
+      leftBoundary = 0 // 10% from the left
+      rightBoundary = 50 // 90% from the left (so, 10% from the right)
+    } else {
+      topBoundary = 30 // 20% from the top
+      bottomBoundary = 80 // 80% from the top (so, 20% from the bottom)
+      leftBoundary = 10 // 10% from the left
+      rightBoundary = 100 // 90% from the left (so, 10% from the right)
+    }
 
     const randomTop =
       Math.random() * (bottomBoundary - topBoundary) + topBoundary
@@ -55,8 +85,15 @@ export function BasicGameCardContainer() {
   }, [isLoading])
 
   return (
-    <StyledGameCardContainerWrapper>
-      <Typography variant="h3">{isLoading ? '' : dataType.title}</Typography>
+    <StyledGameCardContainerWrapper isOpen={isDrawerOpen}>
+      <DataTypeTitleContainer>
+        <DataTypeTypography
+          variant="h3"
+          style={{ fontFamily: 'Pixelify_Sans, sans-serif' }}
+        >
+          {isLoading ? '' : dataType.title}
+        </DataTypeTypography>
+      </DataTypeTitleContainer>
       {isLoading ? (
         <div className="loading-container">
           <img
@@ -64,9 +101,8 @@ export function BasicGameCardContainer() {
             alt="Loading..."
             style={{
               position: 'absolute',
-              top: '-5rem',
-              left: '50%',
-              transform: 'translateX(-50%)'
+              top: isMobileScreen ? '-2rem' : '-4rem',
+              left: isMobileScreen ? '1rem' : '20rem'
             }}
           />
           <img
@@ -75,8 +111,7 @@ export function BasicGameCardContainer() {
             style={{
               position: 'absolute',
               top: '11rem',
-              left: '50%',
-              transform: 'translateX(-50%)'
+              left: isMobileScreen ? '0rem' : '20rem'
             }}
           />
           <img
@@ -86,7 +121,7 @@ export function BasicGameCardContainer() {
               left: marioPosition.left,
               transition: 'all 1.8s ease-out',
               zIndex: 10,
-              width: '10rem' // Adjust this value
+              width: '10rem'
             }}
             src={marioGIF}
             alt="Mario running..."

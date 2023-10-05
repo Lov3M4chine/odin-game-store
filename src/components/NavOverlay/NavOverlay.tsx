@@ -9,10 +9,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { NavDrawer } from './NavDrawer/NavDrawer'
 import { useDrawer } from 'hooks/useDrawer'
 import {
-  Search,
+  DesktopSearch,
+  ResponsiveStyledBox,
   SearchIconWrapper,
+  SiteNameAndLogoContainer,
   StyledAppBar,
-  StyledBox,
   StyledIconButton,
   StyledInputBase,
   StyledTypography
@@ -38,7 +39,7 @@ export function NavOverlay() {
   return (
     <Box flexGrow={1}>
       <StyledAppBar style={{ backgroundColor: '#1E2123', opacity: 1 }}>
-        <Toolbar>
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
           <StyledIconButton
             size="large"
             edge="start"
@@ -48,16 +49,18 @@ export function NavOverlay() {
           >
             <MenuIcon />
           </StyledIconButton>
-          <StyledTypography
-            variant="h6"
-            noWrap
-            onClick={handleRefresh}
-            style={{ cursor: 'pointer' }}
-          >
-            Galactic Games
-          </StyledTypography>
-          <Logo />
-          <Search>
+          <SiteNameAndLogoContainer>
+            <StyledTypography
+              variant="h6"
+              noWrap
+              onClick={handleRefresh}
+              style={{ cursor: 'pointer' }}
+            >
+              Galactic Games
+            </StyledTypography>
+            <Logo />
+          </SiteNameAndLogoContainer>
+          <DesktopSearch>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -67,9 +70,9 @@ export function NavOverlay() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </DesktopSearch>
           <Box flexGrow={1} />
-          <StyledBox>
+          <ResponsiveStyledBox>
             <IconButton
               size="large"
               aria-label="show cart items"
@@ -80,7 +83,7 @@ export function NavOverlay() {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-          </StyledBox>
+          </ResponsiveStyledBox>
         </Toolbar>
       </StyledAppBar>
       <ShoppingCartDrawer

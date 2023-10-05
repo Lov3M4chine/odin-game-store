@@ -140,3 +140,11 @@ export interface CartContextType {
 export type CartProviderProps = {
   children?: React.ReactNode
 }
+
+export interface StyledGameCardContainerWrapperProps {
+  isOpen: boolean
+}
+
+export interface StyledGameDetailsPageWrapperProps {
+  isOpen: boolean
+}
