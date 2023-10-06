@@ -9,4 +9,8 @@ export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    transform: scale(0.9); // scale everything to 90% of its original size
+  }
 `
