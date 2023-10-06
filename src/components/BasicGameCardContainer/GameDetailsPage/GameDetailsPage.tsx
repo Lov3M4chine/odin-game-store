@@ -7,6 +7,7 @@ import { ScreenshotCarousel } from './ScreenshotCarousel'
 import { GameDetailsAddToCartButton } from './GameDetailsAddToCartButton/GameDetailsAddToCartButton'
 import { GameSummaryContainer } from './GameSummaryContainer'
 import { GameDataDisplayContainer } from './GameDataDisplayContainer'
+import { GameDetailsErrorComponent } from './GameDetailsErrorComponent'
 
 export const GameDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -15,11 +16,7 @@ export const GameDetailsPage: React.FC = () => {
   const { games } = useGamesContext()
   const game = games.find((game) => game.id.toString() === id)
   if (!game) {
-    return (
-      <div>
-        Oops! The game details could not be shown. Please try again later.
-      </div>
-    )
+    return <GameDetailsErrorComponent />
   }
   const gameData = processGameData(game)
 

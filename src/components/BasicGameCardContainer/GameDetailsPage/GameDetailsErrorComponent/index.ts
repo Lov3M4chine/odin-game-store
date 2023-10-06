@@ -1,0 +1,1 @@
+export { GameDetailsErrorComponent } from './GameDetailsErrorComponent'
