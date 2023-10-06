@@ -14,6 +14,10 @@ async function fetchIGDBGames(data) {
     },
     data: data
   })
+
+  // Log the headers from the IGDB API response
+  console.log('IGDB API Headers:', response.headers)
+
   console.log('IGDB response received:', response.data)
   validateIGDBResponse(response)
   console.log('IGDB response validated successfully')
