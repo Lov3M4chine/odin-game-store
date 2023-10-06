@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import Toolbar from '@mui/material/Toolbar'
 import { NavDrawerToggleProps } from 'types'
@@ -12,6 +11,7 @@ import {
   platformMenuItems,
   topMenuItems
 } from './MenuListComponent/MenuItems'
+import { Box } from '@mui/material'
 
 export const NavDrawer: React.FC<NavDrawerToggleProps> = ({
   open,

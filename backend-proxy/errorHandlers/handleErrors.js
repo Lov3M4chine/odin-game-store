@@ -1,4 +1,4 @@
-export default function handleErrors(error, req, res, _next) {
+function handleErrors(error, req, res, _next) {
   console.error(error.stack)
 
   const sendErrorResponse = (status, errorType, errorMessage) => {
@@ -77,3 +77,5 @@ export default function handleErrors(error, req, res, _next) {
     `An error occurred: ${error.message}`
   )
 }
+
+module.exports = handleErrors

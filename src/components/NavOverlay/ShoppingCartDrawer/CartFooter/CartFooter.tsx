@@ -1,6 +1,5 @@
 import { CartItemProps } from 'types'
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Typography } from '@mui/material'
 import { FooterDivider } from './styles'
 
 export const CartFooter: React.FC<{ cart: CartItemProps[] }> = ({ cart }) => {

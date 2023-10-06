@@ -1,4 +1,4 @@
-export function processGameImages(game) {
+function processGameImages(game) {
   if (game.cover && game.cover.url) {
     game.cover.url = replaceCoverSize(game.cover.url, 't_cover_big')
   }
@@ -15,7 +15,7 @@ export function processGameImages(game) {
   return game
 }
 
-export function replaceCoverSize(url, size = 't_cover_big') {
+function replaceCoverSize(url, size = 't_cover_big') {
   if (!url) return url
   return url.replace(/t_[a-z_]+/, size)
 }
@@ -35,7 +35,7 @@ const threeMonthsFromNowInSeconds = (() => {
 const todayInSeconds = Math.floor(Date.now() / 1000)
 const COMMON_FIELDS = `fields name,summary,cover.url,genres.name,platforms,platforms.name,screenshots.url,aggregated_rating,release_dates.date,release_dates.human,game_engines.name,game_modes.name,involved_companies.company.name,storyline`
 
-export function determineDataFieldParameters(dataType, query) {
+function determineDataFieldParameters(dataType, query) {
   switch (dataType) {
     // Search
     case 'search':
@@ -77,10 +77,21 @@ export function determineDataFieldParameters(dataType, query) {
   }
 }
 
-export function setDataFieldParameters(req, res, next) {
+function setDataFieldParameters(req, res, next) {
   req.dataFieldParameters = determineDataFieldParameters(
     req.query.dataType,
     req.query.query
   )
   next()
+}
+
+module.exports = {
+  processGameImages,
+  replaceCoverSize,
+  threeMonthsAgoInSeconds,
+  threeMonthsFromNowInSeconds,
+  todayInSeconds,
+  COMMON_FIELDS,
+  determineDataFieldParameters,
+  setDataFieldParameters
 }

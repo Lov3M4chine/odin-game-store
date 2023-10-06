@@ -1,6 +1,6 @@
-import axios from 'axios'
-import { getIGDBAccessToken } from './auth.js'
-import { validateIGDBResponse } from './errorHandlers/validateFunctions.js'
+const axios = require('axios')
+const { getIGDBAccessToken } = require('./auth.js')
+const { validateIGDBResponse } = require('./errorHandlers/validateFunctions.js')
 
 async function fetchIGDBGames(data) {
   const accessToken = await getIGDBAccessToken()
@@ -14,9 +14,10 @@ async function fetchIGDBGames(data) {
     },
     data: data
   })
-
+  console.log('IGDB response received:', response.data)
   validateIGDBResponse(response)
+  console.log('IGDB response validated successfully')
   return response.data
 }
 
-export default fetchIGDBGames
+module.exports = fetchIGDBGames

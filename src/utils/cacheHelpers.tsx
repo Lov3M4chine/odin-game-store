@@ -6,6 +6,14 @@ export const setGameCache = (type: string, games: Game[]) => {
 
 export const getGameCache = (type: string): Game[] | null => {
   const cachedDataString = sessionStorage.getItem(`gamesData-${type}`)
-  const cachedData = cachedDataString ? JSON.parse(cachedDataString) : null
+  let cachedData = null
+  if (cachedDataString) {
+    try {
+      cachedData = JSON.parse(cachedDataString)
+    } catch (e) {
+      console.error('Error parsing cachedData from session storage:', e)
+    }
+  }
+
   return cachedData?.games || null
 }

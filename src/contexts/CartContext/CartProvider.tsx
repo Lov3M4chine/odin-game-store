@@ -4,7 +4,14 @@ import { CartItemProps, CartProviderProps } from 'types'
 import { addToCart, clearCart, removeFromCart } from 'utils/shoppingCartHelpers'
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const initialCart = JSON.parse(localStorage.getItem('cart') || '[]')
+  let initialCart
+  try {
+    initialCart = JSON.parse(localStorage.getItem('cart') || '[]')
+  } catch (e) {
+    console.error('Error parsing cart from local storage:', e)
+    initialCart = []
+  }
+
   const [cart, setCart] = useState(initialCart)
 
   const enhancedAddToCart = (item: CartItemProps) =>

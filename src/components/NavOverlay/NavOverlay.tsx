@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import { NavDrawer } from './NavDrawer/NavDrawer'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
@@ -10,6 +9,7 @@ import { NavButton } from './NavButton'
 import { LogoSection } from './LogoSection'
 import { SearchBar } from './SearchBar'
 import { CartButton } from './CartButton/CartButton'
+import { Box } from '@mui/material'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawerContext()

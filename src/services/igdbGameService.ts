@@ -10,15 +10,26 @@ export const getGames = async (
   }
 
   try {
+    const BASE_URL =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:8888/.netlify/functions/api' // added "/api" here
+        : '/.netlify/functions/api' // added "/api" here
+
+    console.log(BASE_URL)
     const response = await fetch(
-      `http://localhost:3001/fetchGames?dataType=${dataType}${
+      `${BASE_URL}/fetchGames?dataType=${dataType}${
         query ? `&query=${encodeURIComponent(query)}` : ''
       }`
     )
 
     await handleBackendErrors(response)
 
-    const games: Game[] = await response.json()
+    // Log the raw response before attempting to parse it as JSON
+    const text = await response.text()
+    console.log('Raw Response:', text)
+
+    // Then, parse the logged response (text) into JSON
+    const games: Game[] = JSON.parse(text)
 
     return games
   } catch (error) {

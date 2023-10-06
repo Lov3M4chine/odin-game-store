@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
-import { Paper } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Paper } from '@mui/material'
 
 export const StyledCarouselContainer = styled(Paper)`
   elevation: 5;

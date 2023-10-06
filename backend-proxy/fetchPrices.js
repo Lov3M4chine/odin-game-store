@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios')
 
 const CHUNK_SIZE = 50
 
@@ -10,7 +10,7 @@ function chunkArray(arr, chunkSize) {
   return chunks
 }
 
-export async function fetchGamePrices(games) {
+async function fetchGamePrices(games) {
   const fetchPlainForTitle = async (title) => {
     const response = await axios.get(
       `https://api.isthereanydeal.com/v02/game/plain/?key=${
@@ -19,9 +19,10 @@ export async function fetchGamePrices(games) {
     )
     return response.data.data.plain
   }
-
+  console.log('Fetching plains for games')
   const plainsPromises = games.map((game) => fetchPlainForTitle(game.name))
   const plains = await Promise.all(plainsPromises)
+  console.log('Plains fetched:', plains)
 
   const plainsChunks = chunkArray(plains, CHUNK_SIZE)
   let pricingData = {}
@@ -33,7 +34,9 @@ export async function fetchGamePrices(games) {
       }&plains=${chunk.join(',')}`
     )
   )
+  console.log('Fetching pricing data for plains')
   const pricingResponses = await Promise.all(pricingPromises)
+  console.log('Pricing data fetched:', pricingResponses)
 
   for (const response of pricingResponses) {
     Object.assign(pricingData, response.data.data)
@@ -41,3 +44,5 @@ export async function fetchGamePrices(games) {
 
   return { plains, pricingData }
 }
+
+module.exports = fetchGamePrices

@@ -1,4 +1,4 @@
-import { fetchGamePrices } from './fetchPrices.js'
+const fetchGamePrices = require('./fetchPrices.js')
 
 async function setGamePrices(games) {
   const { plains, pricingData } = await fetchGamePrices(games)
@@ -11,4 +11,4 @@ async function setGamePrices(games) {
   })
 }
 
-export default setGamePrices
+module.exports = setGamePrices

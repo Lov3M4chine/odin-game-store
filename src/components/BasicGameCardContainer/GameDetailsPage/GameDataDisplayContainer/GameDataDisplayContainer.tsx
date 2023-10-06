@@ -1,4 +1,5 @@
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -7,7 +8,6 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { GameDataContainerProps } from 'types'
 
 export const GameDataDisplayContainer: React.FC<GameDataContainerProps> = ({

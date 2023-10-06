@@ -1,8 +1,9 @@
-import NodeCache from 'node-cache'
+const NodeCache = require('node-cache')
 
 const cache = new NodeCache({ stdTTL: 24 * 60 * 60 })
 
-export function checkCache(req, res, next, key) {
+function checkCache(req, res, next, key) {
+  console.log('Checking cache')
   if (req.query.dataType === 'search') {
     return next()
   }
@@ -14,7 +15,8 @@ export function checkCache(req, res, next, key) {
   next()
 }
 
-export function getCache(req, res, next) {
+function getCache(req, res, next) {
+  console.log('Getting data from cache')
   if (req.query.dataType === 'search') {
     return next()
   }
@@ -25,8 +27,15 @@ export function getCache(req, res, next) {
   next()
 }
 
-export function setCache(req, key, data) {
+function setCache(req, key, data) {
+  console.log('Setting data in cache')
   if (req.query.dataType !== 'search') {
     return cache.set(key, data)
   }
+}
+
+module.exports = {
+  checkCache,
+  getCache,
+  setCache
 }

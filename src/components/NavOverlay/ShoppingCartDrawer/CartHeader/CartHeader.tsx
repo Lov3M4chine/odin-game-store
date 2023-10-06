@@ -1,5 +1,4 @@
-import { Box } from '@mui/system'
-import { Button, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { HeaderDivider } from './styles'
 

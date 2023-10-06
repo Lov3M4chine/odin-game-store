@@ -1,4 +1,4 @@
-import { processGameImages } from './helpers.js'
+const { processGameImages } = require('./helpers.js')
 
 function processGamesData(games, dataType) {
   let processedGames = games.map((game) => processGameImages(game))
@@ -24,4 +24,4 @@ function processGamesData(games, dataType) {
   return processedGames
 }
 
-export default processGamesData
+module.exports = processGamesData

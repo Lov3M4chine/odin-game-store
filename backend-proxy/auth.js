@@ -1,16 +1,13 @@
-import axios from 'axios'
-import dotenv from 'dotenv'
-import {
+const axios = require('axios')
+const {
   checkEnvironmentVariables,
   handleAxiosError,
   validateResponse
-} from './errorHandlers/validateFunctions.js'
-
-dotenv.config()
+} = require('./errorHandlers/validateFunctions.js')
 
 const TWITCH_TOKEN_ENDPOINT = 'https://id.twitch.tv/oauth2/token'
 
-export async function getIGDBAccessToken() {
+async function getIGDBAccessToken() {
   const { IGDB_CLIENT_ID, IGDB_SECRET } = process.env
   checkEnvironmentVariables(IGDB_CLIENT_ID, IGDB_SECRET)
   try {
@@ -21,4 +18,8 @@ export async function getIGDBAccessToken() {
   } catch (error) {
     handleAxiosError(error)
   }
+}
+
+module.exports = {
+  getIGDBAccessToken
 }
