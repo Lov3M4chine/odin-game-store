@@ -5,18 +5,22 @@ const {
   TokenFetchError
 } = require('./errorClasses.js')
 
+function logError(error) {
+  console.error('Error:', error.message)
+  if (error.data) {
+    console.error('Error Data:', error.data)
+  }
+}
+
 function validateIGDBResponse(response) {
   if (!Array.isArray(response.data)) {
     throw new IGDBError('Unexpected response from IGDB.')
   }
 }
 
-function logAPIErrorResponse(error) {
-  console.error(
-    'Error fetching data from IGDB:',
-    error.response ? error.response.data : error
-  )
-  throw new APIResponseError(
+function createAPIErrorResponse(error) {
+  logError(error) // Log the error
+  return new APIResponseError(
     'Error fetching from IGDB.',
     error.response ? error.response.data : error
   )
@@ -51,7 +55,7 @@ function handleAxiosError(error) {
 
 module.exports = {
   validateIGDBResponse,
-  logAPIErrorResponse,
+  createAPIErrorResponse,
   checkEnvironmentVariables,
   validateResponse,
   handleAxiosError

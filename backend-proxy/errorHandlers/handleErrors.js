@@ -1,5 +1,5 @@
 function handleErrors(error, req, res, _next) {
-  console.error(error.stack)
+  console.log(`Handling error of type: ${error.name}`)
 
   const sendErrorResponse = (status, errorType, errorMessage) => {
     return res.status(status).json({
