@@ -21,6 +21,38 @@ export const processGameData = (game: Game) => {
     ? game.game_engines.map((engine) => engine.name).join(', ')
     : 'N/A'
   const dataRows: GameDataRow[] = []
+
+  if (platforms !== 'N/A') {
+    dataRows.push({ label: 'Platforms', value: platforms })
+  }
+
+  if (game.aggregated_rating) {
+    dataRows.push({
+      label: 'Community Rating',
+      value: game.aggregated_rating.toFixed(2)
+    })
+  }
+
+  if (genres !== 'N/A') {
+    dataRows.push({ label: 'Genres', value: genres })
+  }
+
+  if (game.release_dates?.[0]?.human) {
+    dataRows.push({ label: 'Release Date', value: game.release_dates[0].human })
+  }
+
+  if (gameEngineName !== 'N/A') {
+    dataRows.push({ label: 'Game Engine', value: gameEngineName })
+  }
+
+  if (gameModes !== 'N/A') {
+    dataRows.push({ label: 'Game Modes', value: gameModes })
+  }
+
+  if (companies !== 'N/A') {
+    dataRows.push({ label: 'Companies', value: companies })
+  }
+
   return {
     screenshots,
     platforms,
