@@ -74,3 +74,12 @@ export interface MenuListComponentProps {
     icon?: React.ReactNode
   }>
 }
+
+export interface FullScreenViewerProps {
+  currentImageIndex: number
+  images: string[]
+  handleCloseFullScreen: () => void
+  fontSize: 'small' | 'large'
+  goToLeftImage: (e: React.MouseEvent) => void
+  goToRightImage: (e: React.MouseEvent) => void
+}

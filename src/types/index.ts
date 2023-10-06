@@ -29,5 +29,6 @@ export type {
   NavDrawerListItemProps,
   NavDrawerToggleProps,
   CartItemProps,
-  MenuListComponentProps
+  MenuListComponentProps,
+  FullScreenViewerProps
 } from './UITypes'
