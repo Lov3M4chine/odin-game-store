@@ -95,16 +95,6 @@ export const GameDetailsPage: React.FC = () => {
       value: game.aggregated_rating.toFixed(2)
     })
   }
-  if (platforms !== 'N/A') {
-    dataRows.push({ label: 'Platforms', value: platforms })
-  }
-
-  if (game.aggregated_rating) {
-    dataRows.push({
-      label: 'Community Rating',
-      value: game.aggregated_rating.toFixed(2)
-    })
-  }
 
   if (genres !== 'N/A') {
     dataRows.push({ label: 'Genres', value: genres })

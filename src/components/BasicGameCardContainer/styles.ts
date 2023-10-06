@@ -18,7 +18,7 @@ export const StyledGameCardWrapper = styled.div`
 
 export const StyledGameCardContainerWrapper = styled.div<StyledGameCardContainerWrapperProps>`
   margin-top: 6rem;
-  margin-left: 2rem;
+  margin-left: 0rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
