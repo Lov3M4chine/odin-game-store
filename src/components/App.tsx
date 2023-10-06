@@ -9,10 +9,12 @@ import { CartProvider } from 'contexts/CartContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GameDetailsPage } from './BasicGameCardContainer/GameDetailsPage'
 import 'fonts.css'
+import { ScrollToTop } from './ScrollToTop'
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <DataTypeProvider>
         <GamesProvider>
           <ThemeProvider theme={theme}>
