@@ -7,7 +7,7 @@ import {
   genreMenuItems,
   platformMenuItems,
   topMenuItems
-} from './NavOverlay/NavDrawer/MenuItems'
+} from './NavOverlay/NavDrawer/MenuListComponent/MenuItems'
 
 type MockFn = {
   (): void
