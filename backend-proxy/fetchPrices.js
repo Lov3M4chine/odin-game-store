@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const CHUNK_SIZE = 50
+const CHUNK_SIZE = 100
 
 function chunkArray(arr, chunkSize) {
   const chunks = []

@@ -45,20 +45,20 @@ function determineDataFieldParameters(dataType, query) {
       return `search "${query}"; ${COMMON_FIELDS}; where cover.url != null; limit 100;`
     // Top
     case 'recentlyReleased':
-      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds}; sort release_dates.date desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${threeMonthsAgoInSeconds} & release_dates.date < ${todayInSeconds}; sort release_dates.date desc; limit 100;`
     case 'top100':
       return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     case 'comingSoon':
-      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${todayInSeconds} & release_dates.date < ${threeMonthsFromNowInSeconds}; sort release_dates.date asc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & release_dates.date > ${todayInSeconds} & release_dates.date < ${threeMonthsFromNowInSeconds}; sort release_dates.date asc; limit 100;`
     // Platforms
     case 'xbox':
-      return `${COMMON_FIELDS}; where platforms = (169) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (169) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     case 'playstation':
-      return `${COMMON_FIELDS}; where platforms = (167) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (167) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     case 'pc':
-      return `${COMMON_FIELDS}; where platforms = (6) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (6) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     case 'switch':
-      return `${COMMON_FIELDS}; where platforms = (130) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 500;`
+      return `${COMMON_FIELDS}; where platforms = (130) & cover.url != null & aggregated_rating != null; sort aggregated_rating desc; limit 100;`
     // Genre
     case 'adventure':
       return `${COMMON_FIELDS}; where platforms = (6,130,167,49,169,48) & cover.url != null & aggregated_rating != null & genres.name = "Adventure"; sort aggregated_rating desc; limit 100;`
