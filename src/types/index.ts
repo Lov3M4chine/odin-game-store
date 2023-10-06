@@ -102,6 +102,7 @@ export type GamesContextType = {
   searchTerm?: string
   setSearchTerm?: (term: string) => void
   isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface DataTypeContextType {

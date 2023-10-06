@@ -30,6 +30,7 @@ export const useFetchAndCacheGames = (dataType: string) => {
     games,
     isLoading,
     fetchGames: fetchAndCacheGames,
-    setGames
+    setGames,
+    setIsLoading
   }
 }

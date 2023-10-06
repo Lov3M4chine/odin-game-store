@@ -8,11 +8,13 @@ export const GamesProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const dataTypeValue = useContext(DataTypeContext)?.dataType
   const dataType = dataTypeValue?.type || 'recentlyReleased'
-  const { games, isLoading, fetchGames, setGames } =
+  const { games, isLoading, fetchGames, setGames, setIsLoading } =
     useFetchAndCacheGames(dataType)
 
   return (
-    <GamesContext.Provider value={{ games, fetchGames, setGames, isLoading }}>
+    <GamesContext.Provider
+      value={{ games, fetchGames, setGames, isLoading, setIsLoading }}
+    >
       {children}
     </GamesContext.Provider>
   )

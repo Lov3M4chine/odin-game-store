@@ -7,5 +7,5 @@ export const useGamesContext = (): GamesContextType => {
   if (!context) {
     throw new Error('useGames must be used within a GamesProvider')
   }
-  return context
+  return context // Directly return the context, no need for a local state
 }
