@@ -20,8 +20,8 @@ async function fetchGamePrices(games) {
       )
       return response.data.data.plain
     } catch (error) {
-      console.error(`Error fetching plain for title ${title}:`, error)
-      throw error
+      console.error(`Unable to fetch plain for title ${title}:`, error.message)
+      return null
     }
   }
 
@@ -30,6 +30,7 @@ async function fetchGamePrices(games) {
   let plains = []
   try {
     plains = await Promise.all(plainsPromises)
+    plains = plains.filter(Boolean)
   } catch (error) {
     console.error('Error fetching plains for games:', error)
     throw error
