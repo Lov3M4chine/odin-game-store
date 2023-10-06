@@ -5,13 +5,13 @@ import {
   ListItemText
 } from '@mui/material'
 import { DrawerContext } from 'contexts/DrawerContext'
-import { useDataType } from 'hooks/useDataType'
+import { useDataTypeContext } from 'hooks'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { NavDrawerListItemProps } from 'types'
 
 export function CustomListItem({ icon, text, type }: NavDrawerListItemProps) {
-  const { setDataType } = useDataType()
+  const { setDataType } = useDataTypeContext()
   const navigate = useNavigate()
   const context = useContext(DrawerContext)
 

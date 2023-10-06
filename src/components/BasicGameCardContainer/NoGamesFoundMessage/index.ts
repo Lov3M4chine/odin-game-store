@@ -1,0 +1,1 @@
+export { NoGamesFoundMessage } from './NoGamesFoundMessage'

@@ -1,0 +1,1 @@
+export { GameDetailsAddToCartButton } from './GameDetailsAddToCartButton'

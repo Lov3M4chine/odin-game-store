@@ -7,7 +7,6 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { NavDrawer } from './NavDrawer/NavDrawer'
-import { useDrawer } from 'hooks/useDrawer'
 import {
   DesktopSearch,
   ResponsiveStyledBox,
@@ -20,11 +19,11 @@ import {
 } from './styles'
 import { Logo } from 'components/Icons'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
-import { useSearchGames } from 'hooks'
+import { useDrawerContext, useSearchGames } from 'hooks'
 import { CartContext } from 'contexts/CartContext'
 
 export function NavOverlay() {
-  const { drawerStates, toggleDrawer } = useDrawer()
+  const { drawerStates, toggleDrawer } = useDrawerContext()
   const { searchInput, setSearchInput } = useSearchGames()
   const { cart } = React.useContext(CartContext)
 

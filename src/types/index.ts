@@ -148,3 +148,25 @@ export interface StyledGameCardContainerWrapperProps {
 export interface StyledGameDetailsPageWrapperProps {
   isOpen: boolean
 }
+
+export interface LoadingScreenContainerProps {
+  isLoading: boolean
+}
+
+export interface GamesListProps {
+  games: Game[]
+}
+
+export interface GameDataRow {
+  label: string
+  value: string | number
+}
+
+export interface GameDataContainerProps {
+  dataRows: GameDataRow[]
+  isMobile: boolean
+}
+
+export interface ScreenshotCarouselProps {
+  images: string[]
+}
