@@ -7,9 +7,13 @@ export const StyledGameCardContainerWrapper = styled.div<StyledGameCardContainer
   margin-left: 0rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1rem; // default gap
   flex-wrap: wrap;
   min-height: 100vh;
+
+  @media (max-width: 650px) {
+    gap: 0rem; // adjust this value for mobile gap
+  }
 
   @media (min-width: 650px) {
     margin-left: ${({ isOpen }) => (isOpen ? '20rem' : '6rem')};
