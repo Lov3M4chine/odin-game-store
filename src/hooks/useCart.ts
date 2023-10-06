@@ -1,6 +1,6 @@
 import { CartContext } from 'contexts/CartContext/CartContext'
 import { useContext } from 'react'
-import { CartItem, Game } from 'types'
+import { CartItemProps, Game } from 'types'
 
 export const useCart = () => {
   const context = useContext(CartContext)
@@ -12,11 +12,12 @@ export const useCart = () => {
   const { addToCart } = context
 
   const addGameToCart = (game: Game) => {
-    const cartItem: CartItem = {
+    const cartItem: CartItemProps = {
       ...game,
       id: game.id.toString(),
       quantity: 1,
-      price: game.price || 39.99
+      price: game.price || 39.99,
+      removeFromCart: context.removeFromCart
     }
     addToCart(cartItem)
   }

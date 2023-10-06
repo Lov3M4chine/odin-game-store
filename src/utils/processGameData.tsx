@@ -1,4 +1,4 @@
-import { Game, GameDataRow } from 'types'
+import { Game, GameDataRowProps } from 'types'
 
 export const processGameData = (game: Game) => {
   const screenshots = game.screenshots
@@ -20,7 +20,7 @@ export const processGameData = (game: Game) => {
   const gameEngineName = game.game_engines
     ? game.game_engines.map((engine) => engine.name).join(', ')
     : 'N/A'
-  const dataRows: GameDataRow[] = []
+  const dataRows: GameDataRowProps[] = []
 
   if (platforms !== 'N/A') {
     dataRows.push({ label: 'Platforms', value: platforms })

@@ -5,17 +5,15 @@ import { DynamicFontSizeTypographyProps } from 'types'
 export const DynamicFontSizeTypography: React.FC<
   DynamicFontSizeTypographyProps
 > = ({ text }) => {
-  const textRef = useRef<HTMLDivElement>(null) // Specifying the type for the ref
+  const textRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (textRef.current) {
-      // Checking if the ref is not null
       const element = textRef.current
-      let fontSize = 16 // Start from a base size. Adjust as needed.
+      let fontSize = 16
 
-      // Reduce font size until the text fits or the font size is too small
       while (element.scrollWidth > element.offsetWidth && fontSize > 6) {
-        fontSize -= 0.5 // Decrement font size
+        fontSize -= 0.5
         element.style.fontSize = `${fontSize}px`
       }
     }

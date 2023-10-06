@@ -5,13 +5,13 @@ export const useCarousel = (items: string[]) => {
 
   const goToPrevSlide = () => {
     let index = currentIndex - 1
-    if (index < 0) index = items.length - 1 // wrap around
+    if (index < 0) index = items.length - 1
     setCurrentIndex(index)
   }
 
   const goToNextSlide = () => {
     let index = currentIndex + 1
-    if (index >= items.length) index = 0 // wrap around
+    if (index >= items.length) index = 0
     setCurrentIndex(index)
   }
 

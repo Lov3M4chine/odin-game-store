@@ -1,6 +1,6 @@
 import { GamesListProps } from 'types'
 import { BasicGameCard } from '../BasicGameCard'
-import { StyledGameCardWrapper } from '../styles'
+import { StyledGameCardWrapper } from './styles'
 
 export const GamesList: React.FC<GamesListProps> = ({ games }) => (
   <StyledGameCardWrapper>

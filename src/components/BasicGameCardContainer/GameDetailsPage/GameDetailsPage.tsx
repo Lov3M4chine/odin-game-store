@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { DataTypeTypography, StyledGameDetailsPageWrapper } from '../styles'
 import { useDrawerContext, useGamesContext } from 'hooks'
 import { useIsMobileScreen } from 'hooks/useIsMobileScreen'
 import { processGameData } from 'utils/processGameData'
@@ -8,6 +7,8 @@ import { GameDetailsAddToCartButton } from './GameDetailsAddToCartButton/GameDet
 import { GameSummaryContainer } from './GameSummaryContainer'
 import { GameDataDisplayContainer } from './GameDataDisplayContainer'
 import { GameDetailsErrorComponent } from './GameDetailsErrorComponent'
+import { StyledGameDetailsPageWrapper } from './styles'
+import { DataTypeTypography } from '../styles'
 
 export const GameDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()

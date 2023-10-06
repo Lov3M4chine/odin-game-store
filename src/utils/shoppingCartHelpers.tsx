@@ -1,9 +1,9 @@
-import { CartItem } from 'types'
+import { CartItemProps } from 'types'
 
 export const addToCart = (
-  cart: CartItem[],
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>,
-  item: CartItem
+  cart: CartItemProps[],
+  setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>,
+  item: CartItemProps
 ) => {
   const itemExists = cart.find((cartItem) => cartItem.id === item.id)
 
@@ -26,8 +26,8 @@ export const addToCart = (
 }
 
 export const removeFromCart = (
-  cart: CartItem[],
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>,
+  cart: CartItemProps[],
+  setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>,
   itemId: string
 ) => {
   setCart((prevCart) => {
@@ -38,7 +38,7 @@ export const removeFromCart = (
 }
 
 export const clearCart = (
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>
+  setCart: React.Dispatch<React.SetStateAction<CartItemProps[]>>
 ) => {
   setCart([])
   localStorage.removeItem('cart')

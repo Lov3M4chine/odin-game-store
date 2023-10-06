@@ -37,5 +37,3 @@ export class UnauthorizedError extends AppError {
     this.name = 'UnauthorizedError'
   }
 }
-
-// Any other specific error types you'd like to handle...

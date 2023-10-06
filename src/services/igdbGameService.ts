@@ -5,7 +5,6 @@ export const getGames = async (
   dataType: string,
   query?: string
 ): Promise<Game[]> => {
-  // Check for search dataType with no query and return early.
   if (dataType === 'search' && !query) {
     return []
   }
