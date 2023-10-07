@@ -4,7 +4,12 @@ import {
   StyledGameCardContainerWrapper
 } from './styles'
 import { LoadingScreenContainer } from './LoadingScreenContainer'
-import { useDataTypeContext, useDrawerContext, useGamesContext } from 'hooks'
+import {
+  useDataTypeContext,
+  useDelayedMessage,
+  useDrawerContext,
+  useGamesContext
+} from 'hooks'
 import { NoGamesFoundMessage } from './NoGamesFoundMessage'
 import { GamesList } from './GamesList'
 
@@ -12,6 +17,8 @@ export function BasicGameCardContainer() {
   const { games, isLoading } = useGamesContext()
   const { dataType } = useDataTypeContext()
   const drawerContext = useDrawerContext()
+
+  const showNoGamesMessage = useDelayedMessage(games, isLoading, 500)
 
   return (
     <StyledGameCardContainerWrapper
@@ -25,9 +32,10 @@ export function BasicGameCardContainer() {
           {isLoading ? '' : dataType.title}
         </DataTypeTypography>
       </DataTypeTitleContainer>
+
       {isLoading ? (
         <LoadingScreenContainer isLoading={isLoading} />
-      ) : !games || !games.length ? (
+      ) : showNoGamesMessage ? (
         <NoGamesFoundMessage />
       ) : (
         <GamesList games={games} />
