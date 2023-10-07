@@ -1,20 +1,22 @@
 import * as React from 'react'
 import Toolbar from '@mui/material/Toolbar'
-import { NavDrawer } from './NavDrawer/NavDrawer'
 import { ShoppingCartDrawer } from './ShoppingCartDrawer'
 import { useDrawerContext, useSearchGames } from 'hooks'
 import { CartContext } from 'contexts/CartContext'
-import { StyledAppBar } from './styles'
+import { DrawerBackdrop, StyledAppBar } from './styles'
 import { NavButton } from './NavButton'
 import { LogoSection } from './LogoSection'
 import { SearchBar } from './SearchBar'
 import { CartButton } from './CartButton/CartButton'
 import { Box } from '@mui/material'
+import { useIsMobileScreen } from 'hooks/useIsMobileScreen'
+import { NavDrawer } from './NavDrawer'
 
 export function NavOverlay() {
   const { drawerStates, toggleDrawer } = useDrawerContext()
   const { searchInput, setSearchInput } = useSearchGames()
   const { cart } = React.useContext(CartContext)
+  const isMobile = useIsMobileScreen()
 
   const handleSearchChange = (value: string) => {
     setSearchInput(value)
@@ -22,6 +24,12 @@ export function NavOverlay() {
 
   const handleRefresh = () => {
     window.location.href = '/'
+  }
+
+  const handleBackdropClick = () => {
+    if (isMobile && drawerStates.navDrawerOpen) {
+      toggleDrawer('navDrawerOpen')
+    }
   }
 
   return (
@@ -49,6 +57,9 @@ export function NavOverlay() {
         open={drawerStates.navDrawerOpen}
         onClose={() => toggleDrawer('navDrawerOpen')}
       />
+      {isMobile && drawerStates.navDrawerOpen && (
+        <DrawerBackdrop onClick={handleBackdropClick} />
+      )}
     </Box>
   )
 }

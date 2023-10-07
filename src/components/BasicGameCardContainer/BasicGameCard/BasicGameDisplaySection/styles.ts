@@ -33,5 +33,5 @@ export const StyledCenterText = styled.div`
 `
 
 export const StyledCardActionArea = styled(CardActionArea)`
-  height: 32rem;
+  height: 29rem;
 `

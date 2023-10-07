@@ -13,28 +13,34 @@ import {
 } from './MenuListComponent/MenuItems'
 import { Box } from '@mui/material'
 
-export const NavDrawer: React.FC<NavDrawerToggleProps> = ({
-  open,
-  onClose
-}) => {
-  const { searchInput, setSearchInput } = useSearchGames()
+export const NavDrawer = React.forwardRef<HTMLDivElement, NavDrawerToggleProps>(
+  ({ open, onClose }, ref) => {
+    const { searchInput, setSearchInput } = useSearchGames()
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <StyledDrawer open={open} onClose={onClose} variant="persistent">
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <SearchInputComponent
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            onClose={onClose}
-          />
-          <MenuListComponent title="Top" items={topMenuItems} />
-          <MenuListComponent title="Platform" items={platformMenuItems} />
-          <MenuListComponent title="Genre" items={genreMenuItems} />
-        </Box>
-      </StyledDrawer>
-    </Box>
-  )
-}
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <StyledDrawer
+          open={open}
+          onClose={onClose}
+          variant="persistent"
+          ref={ref}
+        >
+          <Toolbar />
+          <Box sx={{ overflow: 'auto' }}>
+            <SearchInputComponent
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+              onClose={onClose}
+            />
+            <MenuListComponent title="Top" items={topMenuItems} />
+            <MenuListComponent title="Platform" items={platformMenuItems} />
+            <MenuListComponent title="Genre" items={genreMenuItems} />
+          </Box>
+        </StyledDrawer>
+      </Box>
+    )
+  }
+)
+
+NavDrawer.displayName = 'NavDrawer'

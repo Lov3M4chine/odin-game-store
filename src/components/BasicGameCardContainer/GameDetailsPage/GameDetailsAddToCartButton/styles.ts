@@ -9,10 +9,8 @@ export const StyledButton = styled(Button)`
 `
 
 export const PriceLabel = styled.span`
-  marginleft: 2rem;
-  fontsize: 0.9rem;
-  color: black;
-  backgroundcolor: green;
-  borderradius: 5px;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: white;
   padding: 0.4rem;
 `

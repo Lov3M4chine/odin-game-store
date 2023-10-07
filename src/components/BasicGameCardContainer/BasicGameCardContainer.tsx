@@ -18,7 +18,7 @@ export function BasicGameCardContainer() {
   const { dataType } = useDataTypeContext()
   const drawerContext = useDrawerContext()
 
-  const showNoGamesMessage = useDelayedMessage(games, isLoading, 500)
+  const showNoGamesMessage = useDelayedMessage(games, isLoading, 1000)
 
   return (
     <StyledGameCardContainerWrapper
